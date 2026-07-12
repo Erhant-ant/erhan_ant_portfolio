@@ -39,44 +39,6 @@ Deployment in progress. The live website will be available soon.
 
 ## 📁 Project Structure
 
-
-```mermaid
-mindmap
-  root((Erhan Ant))
-    🌍 Portfolio
-      Home
-      About
-      Projects
-      Experience
-      Skills
-      Contact
-
-    🎨 UI
-      Material 3
-      Responsive Design
-      Dark / Light Theme
-      Animations
-
-    ⚙️ Architecture
-      Flutter Web
-      Riverpod
-      GoRouter
-      Shared Preferences
-
-    🌐 Features
-      Bilingual (TR / EN)
-      SEO Friendly
-      Accessibility
-      High Performance
-
-    🚀 Future
-      Blog
-      Admin Panel
-      CMS
-      Analytics
-```
-## 📁 Project Structure
-
 ```mermaid
 mindmap
   root((Erhan Ant — Personal Digital Identity Platform))
@@ -109,35 +71,4 @@ mindmap
       assets/
       web/
       README.md
-```
-## 📁 Project Structure
-
-```mermaid
-mindmap
-  root((erhan_ant_portfolio))
-
-    lib
-      core
-        theme
-        router
-        constants
-      features
-        home
-        about
-        projects
-        contact
-      shared
-        widgets
-        services
-      main.dart
-
-    assets
-      images
-      icons
-
-    web
-
-    pubspec.yaml
-
-    README.md
 ```
