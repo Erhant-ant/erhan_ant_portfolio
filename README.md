@@ -75,3 +75,38 @@ mindmap
       CMS
       Analytics
 ```
+## 📁 Project Structure
+
+```mermaid
+mindmap
+  root((Erhan Ant — Personal Digital Identity Platform))
+
+    🚀 Live Demo
+      Coming Soon
+
+    📸 Preview
+      Hero Section
+
+    ✨ Features
+      🎨 Material 3 Design
+      🌐 Responsive Layout
+      🌍 Bilingual
+      ⚡ Fast Performance
+      ♿ Accessible
+      🔧 Maintainable
+
+    🛠 Tech Stack
+      Flutter Web
+      Riverpod
+      GoRouter
+      Material 3
+      Google Fonts
+      Material Icons
+      Shared Preferences
+
+    📂 Project Structure
+      lib/
+      assets/
+      web/
+      README.md
+```
