@@ -9,6 +9,7 @@
 &gt; Professional without pretending.
 
 ## 🚀 Live Demo
+Deployment in progress. The live website will be available soon.
 <!--
 [erhant.com](https://erhant.com) *(yakında)*
 -->
