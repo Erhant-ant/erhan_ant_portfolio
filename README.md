@@ -38,3 +38,40 @@ Deployment in progress. The live website will be available soon.
 | Storage | Shared Preferences |
 
 ## 📁 Project Structure
+
+
+```mermaid
+mindmap
+  root((Erhan Ant))
+    🌍 Portfolio
+      Home
+      About
+      Projects
+      Experience
+      Skills
+      Contact
+
+    🎨 UI
+      Material 3
+      Responsive Design
+      Dark / Light Theme
+      Animations
+
+    ⚙️ Architecture
+      Flutter Web
+      Riverpod
+      GoRouter
+      Shared Preferences
+
+    🌐 Features
+      Bilingual (TR / EN)
+      SEO Friendly
+      Accessibility
+      High Performance
+
+    🚀 Future
+      Blog
+      Admin Panel
+      CMS
+      Analytics
+```
