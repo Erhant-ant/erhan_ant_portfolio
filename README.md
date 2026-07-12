@@ -75,3 +75,29 @@ mindmap
       CMS
       Analytics
 ```
+
+## 🏗 Architecture
+
+```mermaid
+flowchart LR
+
+A[Visitor] --> B[Flutter Web]
+
+B --> C[GoRouter]
+C --> D[Pages]
+
+D --> E[Home]
+D --> F[About]
+D --> G[Projects]
+D --> H[Contact]
+
+E --> I[Riverpod]
+F --> I
+G --> I
+H --> I
+
+I --> J[Shared Preferences]
+
+B --> K[Material 3]
+B --> L[Responsive Layout]
+```
