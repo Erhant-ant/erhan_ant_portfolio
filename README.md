@@ -110,3 +110,34 @@ mindmap
       web/
       README.md
 ```
+## 📁 Project Structure
+
+```mermaid
+mindmap
+  root((erhan_ant_portfolio))
+
+    lib
+      core
+        theme
+        router
+        constants
+      features
+        home
+        about
+        projects
+        contact
+      shared
+        widgets
+        services
+      main.dart
+
+    assets
+      images
+      icons
+
+    web
+
+    pubspec.yaml
+
+    README.md
+```
