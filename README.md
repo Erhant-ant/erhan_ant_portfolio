@@ -6,7 +6,7 @@
 [![License](https://img.shields.io/badge/License-MIT-green.svg)](LICENSE)
 
 &gt; A long-term digital identity platform built with Flutter Web.  
-&gt; Professional without pretending.
+
 
 ## 🚀 Live Demo
 Deployment in progress. The live website will be available soon.
