@@ -20,6 +20,11 @@ class AppConstants {
   static const double heroPortraitMaxWidth = 350;
   static const double heroPortraitMaxWidthMobile = 280;
 
+  // Animation durations
+  static const Duration durationMicro = Duration(milliseconds: 150);
+  static const Duration durationShort = Duration(milliseconds: 200);
+  static const Duration durationMedium = Duration(milliseconds: 300);
+
   static List<BoxShadow> cardShadow(BuildContext context) => [
         BoxShadow(
           color: Colors.black.withOpacity(0.08),

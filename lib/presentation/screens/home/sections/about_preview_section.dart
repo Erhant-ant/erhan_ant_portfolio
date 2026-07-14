@@ -26,7 +26,7 @@ class AboutPreviewSection extends StatelessWidget {
             Text('Hakkımda', style: theme.textTheme.displayMedium),
             const SizedBox(height: AppConstants.spaceLg),
             Text(
-              'Merhaba! Ben Erhan Ant. Yazılım geliştirme ve bilgi teknolojileri '
+              'Yazılım geliştirme ve bilgi teknolojileri '
               'alanlarında kendimi sürekli geliştiren bir geliştiriciyim. '
               'Flutter ile web ve mobil uygulamalar geliştiriyor, backend '
               'teknolojileri, veritabanları ve kurumsal IT sistemleri üzerine '

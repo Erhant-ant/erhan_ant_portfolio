@@ -56,18 +56,18 @@ class CurrentFocusSection extends StatelessWidget {
                             focuses.map((f) => _FocusCard(focus: f)).toList(),
                       )
                     : Row(
-                        children: focuses
-                            .map((f) => Expanded(
-                                  child: Padding(
-                                    padding: EdgeInsets.symmetric(
-                                      horizontal: focuses.indexOf(f) == 1
-                                          ? AppConstants.spaceMd
-                                          : 0,
-                                    ),
-                                    child: _FocusCard(focus: f),
-                                  ),
-                                ))
-                            .toList(),
+                        children: focuses.asMap().entries.map((entry) {
+                          final f = entry.value;
+                          return Expanded(
+                            child: Padding(
+                              padding: EdgeInsets.symmetric(
+                                horizontal:
+                                    entry.key == 1 ? AppConstants.spaceMd : 0,
+                              ),
+                              child: _FocusCard(focus: f),
+                            ),
+                          );
+                        }).toList(),
                       );
               },
             ),
@@ -78,30 +78,51 @@ class CurrentFocusSection extends StatelessWidget {
   }
 }
 
-class _FocusCard extends StatelessWidget {
+class _FocusCard extends StatefulWidget {
   final ({IconData icon, String title, String description}) focus;
 
   const _FocusCard({required this.focus});
 
   @override
+  State<_FocusCard> createState() => _FocusCardState();
+}
+
+class _FocusCardState extends State<_FocusCard> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
 
-    return Card(
-      child: Padding(
-        padding: const EdgeInsets.all(AppConstants.cardPadding),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Icon(focus.icon, size: 32, color: theme.colorScheme.secondary),
-            const SizedBox(height: AppConstants.spaceMd),
-            Text(focus.title, style: theme.textTheme.displaySmall),
-            const SizedBox(height: AppConstants.spaceSm),
-            Text(
-              focus.description,
-              style: theme.textTheme.bodyMedium,
+    return MouseRegion(
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: AppConstants.durationShort,
+        transform: _isHovered
+            ? Matrix4.translationValues(0, -4, 0)
+            : Matrix4.identity(),
+        child: Card(
+          elevation: _isHovered ? 4 : 0,
+          shadowColor:
+              _isHovered ? Colors.black.withOpacity(0.1) : Colors.transparent,
+          child: Padding(
+            padding: const EdgeInsets.all(AppConstants.cardPadding),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(widget.focus.icon,
+                    size: 32, color: theme.colorScheme.secondary),
+                const SizedBox(height: AppConstants.spaceMd),
+                Text(widget.focus.title, style: theme.textTheme.displaySmall),
+                const SizedBox(height: AppConstants.spaceSm),
+                Text(
+                  widget.focus.description,
+                  style: theme.textTheme.bodyMedium,
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );

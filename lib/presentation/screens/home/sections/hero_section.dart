@@ -27,7 +27,7 @@ class HeroSection extends StatelessWidget {
       children: [
         Expanded(flex: 6, child: _buildContent(context, theme)),
         const SizedBox(width: AppConstants.space3Xl),
-        Expanded(flex: 4, child: _buildPortrait(theme)),
+        Expanded(flex: 4, child: _buildPortrait(context, theme)),
       ],
     );
   }
@@ -37,7 +37,7 @@ class HeroSection extends StatelessWidget {
       children: [
         _buildContent(context, theme, center: true),
         const SizedBox(height: AppConstants.space2Xl),
-        _buildPortrait(theme),
+        _buildPortrait(context, theme),
       ],
     );
   }
@@ -114,18 +114,40 @@ class HeroSection extends StatelessWidget {
     );
   }
 
-  Widget _buildPortrait(ThemeData theme) {
+  Widget _buildPortrait(BuildContext context, ThemeData theme) {
     return Container(
-      width: AppConstants.heroPortraitMaxWidth,
-      height: AppConstants.heroPortraitMaxWidth * 4 / 3,
-      decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(AppConstants.radiusLg),
-        border: Border.all(color: theme.colorScheme.outline),
+      width: Responsive.isMobile(context)
+          ? AppConstants.heroPortraitMaxWidthMobile
+          : AppConstants.heroPortraitMaxWidth,
+      // Yüksekliği otomatik, aspect ratio koruyarak
+      constraints: const BoxConstraints(
+        maxHeight: 450,
       ),
-      child: Center(
-          child: Icon(Icons.person,
-              size: 80, color: theme.colorScheme.onSurface.withOpacity(0.2))),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(AppConstants.radiusLg),
+        child: Image.asset(
+          'assets/images/image.png',
+          fit: BoxFit.contain, // Şeffaf alanları koru
+          errorBuilder: (context, error, stackTrace) {
+            // Fotoğraf yoksa placeholder
+            return Container(
+              height: AppConstants.heroPortraitMaxWidth * 4 / 3,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.surface,
+                borderRadius: BorderRadius.circular(AppConstants.radiusLg),
+                border: Border.all(color: theme.colorScheme.outline),
+              ),
+              child: Center(
+                child: Icon(
+                  Icons.person,
+                  size: 80,
+                  color: theme.colorScheme.onSurface.withOpacity(0.2),
+                ),
+              ),
+            );
+          },
+        ),
+      ),
     );
   }
 }
