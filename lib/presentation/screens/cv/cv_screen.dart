@@ -1,15 +1,11 @@
-import 'dart:js_interop';
-
 import 'package:flutter/material.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/router/app_router.dart';
+import '../../../core/utils/cv_downloader.dart';
 import '../../../core/utils/responsive.dart';
 import '../../widgets/layout/app_scaffold.dart';
-
-@JS('downloadCv')
-external void downloadCvFile();
 
 class CvScreen extends StatelessWidget {
   const CvScreen({super.key});

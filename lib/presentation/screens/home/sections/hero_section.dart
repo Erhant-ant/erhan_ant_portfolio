@@ -11,39 +11,44 @@ class HeroSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
+    final heroMinHeight =
+        MediaQuery.sizeOf(context).height - AppConstants.headerHeight;
 
-    return Padding(
-      padding: EdgeInsets.symmetric(
-        horizontal: Responsive.pagePadding(context),
-        vertical: AppConstants.space3Xl,
-      ),
-      child: Center(
-        child: ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxWidth: AppConstants.maxContentWidth,
-          ),
-          child: isMobile
-              ? Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    const _HeroContent(),
-                    const SizedBox(height: AppConstants.space2Xl),
-                    Center(
-                      child: ConstrainedBox(
-                        constraints: const BoxConstraints(maxWidth: 280),
-                        child: const _ProfilePhoto(),
+    return ConstrainedBox(
+      constraints: BoxConstraints(minHeight: heroMinHeight),
+      child: Padding(
+        padding: EdgeInsets.symmetric(
+          horizontal: Responsive.pagePadding(context),
+          vertical: AppConstants.space3Xl,
+        ),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(
+              maxWidth: AppConstants.maxContentWidth,
+            ),
+            child: isMobile
+                ? Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const _HeroContent(),
+                      const SizedBox(height: AppConstants.space2Xl),
+                      Center(
+                        child: ConstrainedBox(
+                          constraints: const BoxConstraints(maxWidth: 280),
+                          child: const _ProfilePhoto(),
+                        ),
                       ),
-                    ),
-                  ],
-                )
-              : const Row(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    Expanded(child: _HeroContent()),
-                    SizedBox(width: AppConstants.space3Xl),
-                    SizedBox(width: 320, child: _ProfilePhoto()),
-                  ],
-                ),
+                    ],
+                  )
+                : const Row(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      Expanded(child: _HeroContent()),
+                      SizedBox(width: AppConstants.space3Xl),
+                      SizedBox(width: 320, child: _ProfilePhoto()),
+                    ],
+                  ),
+          ),
         ),
       ),
     );
