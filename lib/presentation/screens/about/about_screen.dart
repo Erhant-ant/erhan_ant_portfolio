@@ -36,14 +36,14 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppConstants.space2Xl),
                   Text(
-                    localized('Hello, I am Erhan.', 'Merhaba, ben Erhan.'),
-                    style: theme.textTheme.displayLarge,
+                    localized('Career Goal', 'Kariyer Hedefi'),
+                    style: theme.textTheme.displaySmall,
                   ),
                   const SizedBox(height: AppConstants.spaceMd),
                   Text(
                     localized(
-                      'I am a Computer Science graduate with a background in Business Administration, U.S. education, and operations experience. I am building practical skills in IT support, systems, data management, and modern application development.',
-                      'Bilgisayar Bilimleri mezunuyum. Isletme altyapimi ABD egitim ve operasyon deneyimimle birlestirerek IT destek, sistemler, veri yonetimi ve modern uygulama gelistirme alanlarinda pratik beceriler gelistiriyorum.',
+                      'I want to grow in IT support, systems, data management, and software development while building practical projects and gaining experience with modern technologies.',
+                      'IT destek, sistemler, veri yönetimi ve yazılım geliştirme alanlarında kendimi geliştirirken pratik projeler üretmek ve modern teknolojilerle deneyim kazanmak istiyorum.',
                     ),
                     style: theme.textTheme.bodyLarge,
                   ),
