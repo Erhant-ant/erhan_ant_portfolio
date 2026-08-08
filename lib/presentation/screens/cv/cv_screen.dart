@@ -34,8 +34,8 @@ class CvScreen extends StatelessWidget {
                   const SizedBox(height: AppConstants.spaceMd),
                   Text(
                     localized(
-                      'Erhan Ant - Computer Science Graduate',
-                      'Erhan Ant - Bilgisayar Bilimleri Mezunu',
+                      'Erhan Ant - IT & Software',
+                      'Erhan Ant - IT & Yazılım',
                     ),
                     style: theme.textTheme.displaySmall,
                   ),
@@ -47,8 +47,8 @@ class CvScreen extends StatelessWidget {
                   const SizedBox(height: AppConstants.spaceSm),
                   Text(
                     localized(
-                      'Computer Science graduate with a Business Administration background, U.S. education, and operations experience. Building practical skills in IT support, systems, data management, and modern application development.',
-                      'Isletme altyapisi, ABD egitimi ve operasyon deneyimi olan Bilgisayar Bilimleri mezunuyum. IT destek, sistemler, veri yonetimi ve modern uygulama gelistirme alanlarinda pratik beceriler gelistiriyorum.',
+                      'Passionate about technology, software development, and practical problem solving. Interested in IT support, systems, data management, and modern application development, with a focus on learning, building, and turning ideas into useful digital experiences.',
+                      'Teknoloji, yazılım geliştirme ve pratik problem çözmeye ilgi duyuyorum. IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme alanlarına odaklanıyor; öğrenmeye, üretmeye ve fikirleri kullanışlı dijital deneyimlere dönüştürmeye önem veriyorum.',
                     ),
                     style: theme.textTheme.bodyLarge,
                   ),
