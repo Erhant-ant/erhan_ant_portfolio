@@ -34,25 +34,50 @@ class AboutScreen extends StatelessWidget {
                       backgroundColor: Colors.grey.shade200,
                     ),
                   ),
+
                   const SizedBox(height: AppConstants.space2Xl),
+
                   Text(
-                    localized('Career Goal', 'Kariyer Hedefi'),
-                    style: theme.textTheme.displaySmall,
+                    localized('A Little About Me', 'Hakkımda'),
+                    style: theme.textTheme.displayMedium,
                   ),
+
                   const SizedBox(height: AppConstants.spaceMd),
+
                   Text(
                     localized(
-                      'I want to grow in IT support, systems, data management, and software development while building practical projects and gaining experience with modern technologies.',
-                      'IT destek, sistemler, veri yönetimi ve yazılım geliştirme alanlarında kendimi geliştirirken pratik projeler üretmek ve modern teknolojilerle deneyim kazanmak istiyorum.',
+                      'I enjoy exploring technology, solving problems, and building practical projects. My interests include IT support, systems, data management, and modern application development. I like learning by building and turning ideas into useful digital experiences.',
+                      'Teknolojiyi keşfetmeyi, problemleri çözmeyi ve pratik projeler geliştirmeyi seviyorum. İlgi alanlarım arasında IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme bulunuyor. Üreterek öğrenmeyi ve fikirleri kullanışlı dijital deneyimlere dönüştürmeyi seviyorum.',
                     ),
                     style: theme.textTheme.bodyLarge,
                   ),
+
                   const SizedBox(height: AppConstants.space2Xl),
+
                   Text(
-                    localized('Current Focus', 'Su An Odaklandigim Alanlar'),
+                    localized('Future Direction', 'Gelecekteki Yönüm'),
                     style: theme.textTheme.displaySmall,
                   ),
+
                   const SizedBox(height: AppConstants.spaceMd),
+
+                  Text(
+                    localized(
+                      'I want to keep learning, building, and exploring different areas of technology while turning ideas into practical projects and meaningful digital experiences.',
+                      'Öğrenmeye, üretmeye ve teknolojinin farklı alanlarını keşfetmeye devam ederken fikirleri pratik projelere ve anlamlı dijital deneyimlere dönüştürmek istiyorum.',
+                    ),
+                    style: theme.textTheme.bodyLarge,
+                  ),
+
+                  const SizedBox(height: AppConstants.space2Xl),
+
+                  Text(
+                    localized('Current Focus', 'Şu An Odaklandığım Alanlar'),
+                    style: theme.textTheme.displaySmall,
+                  ),
+
+                  const SizedBox(height: AppConstants.spaceMd),
+
                   Wrap(
                     spacing: AppConstants.spaceSm,
                     runSpacing: AppConstants.spaceSm,
@@ -64,23 +89,10 @@ class AboutScreen extends StatelessWidget {
                       const Chip(label: Text('Flutter')),
                       Chip(
                         label: Text(
-                          localized('AI Tools', 'Yapay Zeka Araclari'),
+                          localized('AI Tools', 'Yapay Zeka Araçları'),
                         ),
                       ),
                     ],
-                  ),
-                  const SizedBox(height: AppConstants.space2Xl),
-                  Text(
-                    localized('Career Goal', 'Kariyer Hedefi'),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  Text(
-                    localized(
-                      'I enjoy exploring technology, solving problems, and building practical projects. My interests include IT support, systems, data management, and modern application development, with a focus on learning, creating, and exploring new technologies.',
-                      'Teknolojiyi keşfetmeyi, problemleri çözmeyi ve pratik projeler geliştirmeyi seviyorum. İlgi alanlarım arasında IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme bulunuyor. Öğrenmeye, üretmeye ve yeni teknolojileri keşfetmeye odaklanıyorum.',
-                    ),
-                    style: theme.textTheme.bodyLarge,
                   ),
                 ],
               ),
