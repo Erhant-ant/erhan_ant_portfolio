@@ -132,8 +132,8 @@ class CvScreen extends StatelessWidget {
                           title: const Text('Passaic County Community College'),
                           subtitle: Text(
                             localized(
-                              'Associate Degree in Computer Science, 2026',
-                              'Bilgisayar Bilimleri On Lisans Derecesi, 2026',
+                              'Associate Degree in Computer Science, Ongoing',
+                              'Bilgisayar Bilimleri On Lisans Derecesi, Devam ',
                             ),
                           ),
                         ),

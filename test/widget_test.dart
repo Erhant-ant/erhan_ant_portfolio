@@ -13,6 +13,6 @@ void main() {
     await tester.pumpWidget(const PortfolioApp());
 
     expect(find.text('Erhan Ant'), findsOneWidget);
-    expect(find.text('Computer Science Graduate'), findsOneWidget);
+    expect(find.text('Technology & Software'), findsOneWidget);
   });
 }

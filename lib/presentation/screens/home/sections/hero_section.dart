@@ -73,7 +73,7 @@ class _HeroContent extends StatelessWidget {
         Text('Erhan Ant', style: theme.textTheme.displayLarge),
         const SizedBox(height: AppConstants.spaceMd),
         Text(
-          localized('Computer Science Graduate', 'Bilgisayar Bilimleri Mezunu'),
+          localized('Technology & Software', 'Teknoloji & Yazılım'),
           style: theme.textTheme.displaySmall,
         ),
         const SizedBox(height: AppConstants.spaceMd),
@@ -97,10 +97,10 @@ class _HeroContent extends StatelessWidget {
         const SizedBox(height: AppConstants.spaceLg),
         Text(
           localized(
-            'I am building skills in Flutter, IT support, and AI tools. '
-                'Here I share my projects and professional development.',
-            'Flutter, IT destek ve yapay zeka araclari uzerine calisiyorum. '
-                'Burada projelerimi ve gelisim surecimi paylasiyorum.',
+            'I enjoy exploring technology, building applications, solving problems, and turning ideas into practical projects. '
+                'Here, I share the things I build, learn, and explore along the way.',
+            'Teknolojiyi keşfetmeyi, uygulamalar geliştirmeyi, problemleri çözmeyi ve fikirleri pratik projelere dönüştürmeyi seviyorum. '
+                'Burada geliştirdiğim, öğrendiğim ve keşfettiğim şeyleri paylaşıyorum.',
           ),
           style: theme.textTheme.bodyLarge,
         ),

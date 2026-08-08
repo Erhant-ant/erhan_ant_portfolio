@@ -77,8 +77,8 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(height: AppConstants.spaceMd),
                   Text(
                     localized(
-                      'To contribute in IT support, systems support, operations support, and data management roles while continuing to build software projects.',
-                      'Yazilim projeleri gelistirmeye devam ederken IT destek, sistem destek, operasyon destek ve veri yonetimi rollerinde katki sunmayi hedefliyorum.',
+                      'I enjoy exploring technology, solving problems, and building practical projects. My interests include IT support, systems, data management, and modern application development, with a focus on learning, creating, and exploring new technologies.',
+                      'Teknolojiyi keşfetmeyi, problemleri çözmeyi ve pratik projeler geliştirmeyi seviyorum. İlgi alanlarım arasında IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme bulunuyor. Öğrenmeye, üretmeye ve yeni teknolojileri keşfetmeye odaklanıyorum.',
                     ),
                     style: theme.textTheme.bodyLarge,
                   ),
