@@ -12,93 +12,99 @@ class AppScaffold extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final theme = Theme.of(context);
-    final isMobile = Responsive.isMobile(context);
+    return ValueListenableBuilder<AppLanguage>(
+      valueListenable: appLanguageController,
+      builder: (context, language, child) {
+        final theme = Theme.of(context);
+        final isMobile = Responsive.isMobile(context);
 
-    return Scaffold(
-      appBar: AppBar(
-        toolbarHeight: AppConstants.headerHeight,
-        titleSpacing: Responsive.pagePadding(context),
-        title: TextButton(
-          onPressed: () {
-            Navigator.of(context).popUntil((route) => route.isFirst);
-          },
-          style: TextButton.styleFrom(
-            padding: EdgeInsets.zero,
-            foregroundColor: theme.colorScheme.onSurface,
-          ),
-          child: Text(
-            'EA',
-            style: theme.textTheme.displaySmall?.copyWith(
-              fontWeight: FontWeight.w800,
-            ),
-          ),
-        ),
-        actions: [
-          if (!isMobile) ...[
-            _HeaderLink(label: localized('About', 'Hakkimda'), route: '/about'),
-            _HeaderLink(
-              label: localized('Projects', 'Projeler'),
-              route: '/projects',
-            ),
-            _HeaderLink(
-              label: localized('Learning', 'Egitimler'),
-              route: '/certificates',
-            ),
-            const _HeaderLink(label: 'CV', route: '/cv'),
-            _HeaderLink(
-              label: localized('Contact', 'Iletisim'),
-              route: '/contact',
-            ),
-          ],
-          PopupMenuButton<AppLanguage>(
-            tooltip: localized('Language', 'Dil'),
-            icon: const Icon(Icons.language_outlined),
-            onSelected: appLanguageController.setLanguage,
-            itemBuilder: (context) {
-              final language = appLanguageController.value;
-
-              return [
-                CheckedPopupMenuItem(
-                  value: AppLanguage.english,
-                  checked: language == AppLanguage.english,
-                  child: const Text('English'),
-                ),
-                CheckedPopupMenuItem(
-                  value: AppLanguage.turkish,
-                  checked: language == AppLanguage.turkish,
-                  child: const Text('Turkce'),
-                ),
-              ];
-            },
-          ),
-          Padding(
-            padding: EdgeInsets.only(
-              right: Responsive.pagePadding(context) - AppConstants.spaceSm,
-            ),
-            child: ValueListenableBuilder<ThemeMode>(
-              valueListenable: themeController,
-              builder: (context, themeMode, child) {
-                final isDark = themeMode == ThemeMode.dark;
-
-                return IconButton(
-                  tooltip: isDark
-                      ? localized('Light theme', 'Aydinlik tema')
-                      : localized('Dark theme', 'Koyu tema'),
-                  onPressed: themeController.toggle,
-                  icon: Icon(
-                    isDark
-                        ? Icons.light_mode_outlined
-                        : Icons.dark_mode_outlined,
-                  ),
-                );
+        return Scaffold(
+          appBar: AppBar(
+            toolbarHeight: AppConstants.headerHeight,
+            titleSpacing: Responsive.pagePadding(context),
+            title: TextButton(
+              onPressed: () {
+                Navigator.of(context).popUntil((route) => route.isFirst);
               },
+              style: TextButton.styleFrom(
+                padding: EdgeInsets.zero,
+                foregroundColor: theme.colorScheme.onSurface,
+              ),
+              child: Text(
+                'EA',
+                style: theme.textTheme.displaySmall?.copyWith(
+                  fontWeight: FontWeight.w800,
+                ),
+              ),
             ),
+            actions: [
+              if (!isMobile) ...[
+                _HeaderLink(label: localized('About', 'Hakkimda'), route: '/about'),
+                _HeaderLink(
+                  label: localized('Projects', 'Projeler'),
+                  route: '/projects',
+                ),
+                _HeaderLink(
+                  label: localized('Learning', 'Egitimler'),
+                  route: '/certificates',
+                ),
+                const _HeaderLink(label: 'CV', route: '/cv'),
+                _HeaderLink(
+                  label: localized('Contact', 'Iletisim'),
+                  route: '/contact',
+                ),
+              ],
+              PopupMenuButton<AppLanguage>(
+                tooltip: localized('Language', 'Dil'),
+                icon: const Icon(Icons.language_outlined),
+                onSelected: appLanguageController.setLanguage,
+                itemBuilder: (context) {
+                  return [
+                    CheckedPopupMenuItem(
+                      value: AppLanguage.english,
+                      checked: language == AppLanguage.english,
+                      child: const Text('English'),
+                    ),
+                    CheckedPopupMenuItem(
+                      value: AppLanguage.turkish,
+                      checked: language == AppLanguage.turkish,
+                      child: const Text('Turkce'),
+                    ),
+                  ];
+                },
+              ),
+              Padding(
+                padding: EdgeInsets.only(
+                  right: Responsive.pagePadding(context) - AppConstants.spaceSm,
+                ),
+                child: ValueListenableBuilder<ThemeMode>(
+                  valueListenable: themeController,
+                  builder: (context, themeMode, child) {
+                    final isDark = themeMode == ThemeMode.dark;
+
+                    return IconButton(
+                      tooltip: isDark
+                          ? localized('Light theme', 'Aydinlik tema')
+                          : localized('Dark theme', 'Koyu tema'),
+                      onPressed: themeController.toggle,
+                      icon: Icon(
+                        isDark
+                            ? Icons.light_mode_outlined
+                            : Icons.dark_mode_outlined,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
-      drawer: isMobile ? const _MobileMenu() : null,
-      body: body,
+          drawer: isMobile ? const _MobileMenu() : null,
+          body: KeyedSubtree(
+            key: ValueKey(language),
+            child: body,
+          ),
+        );
+      },
     );
   }
 }
