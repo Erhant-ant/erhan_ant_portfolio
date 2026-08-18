@@ -34,7 +34,6 @@ class PortfolioApp extends StatelessWidget {
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: themeMode,
-              initialRoute: AppRoutes.home,
               onGenerateRoute: AppRouter.onGenerateRoute,
             );
           },
