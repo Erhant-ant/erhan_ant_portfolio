@@ -13,6 +13,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppScaffold(
+      pageTitleBuilder: () => 'Erhan Ant | Flutter & IT Portfolio',
       body: SingleChildScrollView(
         child: Column(
           children: [

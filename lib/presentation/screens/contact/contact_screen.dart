@@ -15,6 +15,8 @@ class ContactScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AppScaffold(
+      pageTitleBuilder: () =>
+          localized('Contact | Erhan Ant', 'Iletisim | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),

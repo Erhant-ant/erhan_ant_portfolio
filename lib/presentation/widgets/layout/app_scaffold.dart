@@ -6,9 +6,10 @@ import '../../../core/providers/theme_controller.dart';
 import '../../../core/utils/responsive.dart';
 
 class AppScaffold extends StatelessWidget {
-  const AppScaffold({super.key, required this.body});
+  const AppScaffold({super.key, required this.body, this.pageTitleBuilder});
 
   final Widget body;
+  final String Function()? pageTitleBuilder;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +19,10 @@ class AppScaffold extends StatelessWidget {
         final theme = Theme.of(context);
         final isMobile = Responsive.isMobile(context);
 
-        return Scaffold(
+        return Title(
+          title: pageTitleBuilder?.call() ?? AppConstants.appName,
+          color: theme.colorScheme.primary,
+          child: Scaffold(
           appBar: AppBar(
             toolbarHeight: AppConstants.headerHeight,
             titleSpacing: Responsive.pagePadding(context),
@@ -99,9 +103,10 @@ class AppScaffold extends StatelessWidget {
             ],
           ),
           drawer: isMobile ? const _MobileMenu() : null,
-          body: KeyedSubtree(
-            key: ValueKey(language),
-            child: body,
+            body: KeyedSubtree(
+              key: ValueKey(language),
+              child: body,
+            ),
           ),
         );
       },

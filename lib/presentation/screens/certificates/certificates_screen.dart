@@ -13,6 +13,8 @@ class CertificatesScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AppScaffold(
+      pageTitleBuilder: () =>
+          localized('Learning | Erhan Ant', 'Egitimler | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),

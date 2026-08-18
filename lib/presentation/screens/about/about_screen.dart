@@ -13,6 +13,8 @@ class AboutScreen extends StatelessWidget {
     final theme = Theme.of(context);
 
     return AppScaffold(
+      pageTitleBuilder: () =>
+          localized('About | Erhan Ant', 'Hakkimda | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),

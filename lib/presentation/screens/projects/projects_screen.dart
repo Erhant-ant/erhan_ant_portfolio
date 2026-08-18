@@ -81,6 +81,8 @@ class ProjectsScreen extends StatelessWidget {
     ];
 
     return AppScaffold(
+      pageTitleBuilder: () =>
+          localized('Projects | Erhan Ant', 'Projeler | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
