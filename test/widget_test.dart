@@ -13,8 +13,8 @@ void main() {
   testWidgets('Portfolio app opens on the home screen', (tester) async {
     await tester.pumpWidget(const PortfolioApp());
 
-    expect(find.text('Erhan Ant'), findsOneWidget);
-    expect(find.text('Technology & Software'), findsOneWidget);
+    expect(find.text('Technology,\nwith purpose.'), findsOneWidget);
+    expect(find.text('Explore Projects'), findsOneWidget);
   });
 
   testWidgets('Portfolio opens a shared project route', (tester) async {
