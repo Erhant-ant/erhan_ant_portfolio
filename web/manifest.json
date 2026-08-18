@@ -1,11 +1,11 @@
 {
-    "name": "erhan_ant_portfolio_v2",
-    "short_name": "erhan_ant_portfolio_v2",
+    "name": "Erhan Ant Portfolio",
+    "short_name": "Erhan Ant",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#F8FAFC",
+    "theme_color": "#0F766E",
+    "description": "A bilingual Flutter portfolio for Erhan Ant.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
