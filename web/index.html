@@ -6,7 +6,6 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="description" content="Erhan Ant's bilingual Flutter portfolio featuring IT support, software projects, technical learning, and professional profiles.">
   <meta name="author" content="Erhan Ant">
   <meta name="robots" content="index, follow">
@@ -57,9 +56,82 @@
       ]
     }
   </script>
+  <style>
+    body, html {
+      margin: 0;
+      padding: 0;
+      background-color: #0f172a; /* matches a dark elegant theme */
+      width: 100%;
+      height: 100%;
+    }
+    .loading-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background-color: #0f172a;
+      z-index: 9999;
+      transition: opacity 0.5s ease-out;
+    }
+    .spinner {
+      width: 48px;
+      height: 48px;
+      border: 4px solid rgba(15, 118, 110, 0.2);
+      border-radius: 50%;
+      border-top-color: #0F766E;
+      animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+    .loading-text {
+      margin-top: 24px;
+      color: #0F766E;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-weight: 500;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      font-size: 14px;
+      animation: pulse 2s infinite ease-in-out;
+    }
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 0.5; }
+      50% { opacity: 1; }
+    }
+  </style>
 </head>
 
 <body>
+  <div id="loading" class="loading-container">
+    <div class="spinner"></div>
+    <div class="loading-text">Yükleniyor / Loading</div>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      var observer = new MutationObserver(function(mutations) {
+        for (var i = 0; i < mutations.length; i++) {
+          if (mutations[i].addedNodes.length > 0) {
+            var node = mutations[i].addedNodes[0];
+            if (node.tagName === 'FLT-GLASS-PANE' || node.tagName === 'FLUTTER-VIEW') {
+              var loader = document.getElementById('loading');
+              if (loader) {
+                loader.style.opacity = '0';
+                setTimeout(() => loader.remove(), 500); // Wait for transition
+              }
+              observer.disconnect();
+            }
+          }
+        }
+      });
+      observer.observe(document.body, { childList: true });
+    });
+  </script>
   <script src="flutter_bootstrap.js" async></script>
   <script>
     function downloadCv() {

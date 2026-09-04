@@ -16,7 +16,7 @@ class ContactScreen extends StatelessWidget {
 
     return AppScaffold(
       pageTitleBuilder: () =>
-          localized('Contact | Erhan Ant', 'Iletisim | Erhan Ant'),
+          localized('Contact | Erhan Ant', 'İletişim | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
@@ -29,14 +29,14 @@ class ContactScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  localized('Contact', 'Iletisim'),
+                  localized('Contact', 'İletişim'),
                   style: theme.textTheme.displayLarge,
                 ),
                 const SizedBox(height: AppConstants.spaceMd),
                 Text(
                   localized(
                     'Use my profiles to follow my work or connect professionally.',
-                    'Calismalarimi takip etmek veya profesyonel olarak baglanti kurmak icin profil bilgilerimi kullanabilirsin.',
+                    'Çalışmalarımı takip etmek veya profesyonel olarak bağlantı kurmak için profil bilgilerimi kullanabilirsin.',
                   ),
                   style: theme.textTheme.bodyLarge,
                 ),
@@ -85,7 +85,7 @@ class _ContactCard extends StatelessWidget {
           content: Text(
             localized(
               '$title could not be opened.',
-              '$title baglantisi acilamadi.',
+              '$title bağlantısı açılamadı.',
             ),
           ),
         ),
@@ -117,7 +117,7 @@ class _ContactCard extends StatelessWidget {
                 content: Text(
                   localized(
                     '$title link copied.',
-                    '$title baglantisi kopyalandi.',
+                    '$title bağlantısı kopyalandı.',
                   ),
                 ),
               ),

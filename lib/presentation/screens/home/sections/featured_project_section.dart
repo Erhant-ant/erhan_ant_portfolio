@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/localization/app_language.dart';
@@ -19,7 +20,7 @@ class FeaturedProjectSection extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            localized('The link could not be opened.', 'Baglanti acilamadi.'),
+            localized('The link could not be opened.', 'Bağlantı açılamadı.'),
           ),
         ),
       );
@@ -153,7 +154,7 @@ class _ProjectVisual extends StatelessWidget {
                     child: Text(
                       localized(
                         'A practical workspace for IT support teams.',
-                        'IT destek ekipleri icin pratik bir calisma alani.',
+                        'IT destek ekipleri için pratik bir çalışma alanı.',
                       ),
                       style: theme.textTheme.titleMedium?.copyWith(
                         color: Colors.white,
@@ -218,7 +219,7 @@ class _FeaturedProjectContent extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Text(
-          localized('Featured Build', 'One Cikan Uygulama').toUpperCase(),
+          localized('Featured Build', 'Öne Çıkan Uygulama').toUpperCase(),
           style: theme.textTheme.bodyMedium?.copyWith(
             color: accent,
             fontWeight: FontWeight.w800,
@@ -231,7 +232,7 @@ class _FeaturedProjectContent extends StatelessWidget {
         Text(
           localized(
             'A bilingual IT support ticket tracker that turns scattered requests into a clear, manageable workflow.',
-            'Daginik IT destek taleplerini net ve yonetilebilir bir is akisina donusturen iki dilli ticket takip uygulamasi.',
+            'Dağınık IT destek taleplerini net ve yönetilebilir bir iş akışına dönüştüren iki dilli ticket takip uygulaması.',
           ),
           style: theme.textTheme.bodyLarge,
         ),
@@ -240,8 +241,8 @@ class _FeaturedProjectContent extends StatelessWidget {
           spacing: AppConstants.spaceSm,
           runSpacing: AppConstants.spaceSm,
           children: [
-            _Capability(label: localized('Bilingual', 'Iki dilli')),
-            _Capability(label: localized('Workflow board', 'Is akisi panosu')),
+            _Capability(label: localized('Bilingual', 'İki dilli')),
+            _Capability(label: localized('Workflow board', 'İş akışı panosu')),
             _Capability(label: localized('SLA tracking', 'SLA takibi')),
           ],
         ),
@@ -252,15 +253,15 @@ class _FeaturedProjectContent extends StatelessWidget {
           children: [
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.projects);
+                context.go(AppRoutes.projects);
               },
               icon: const Icon(Icons.arrow_outward),
-              label: Text(localized('Read the Case Study', 'Vaka Calismasini Oku')),
+              label: Text(localized('Read the Case Study', 'Vaka Çalışmasını Oku')),
             ),
             OutlinedButton.icon(
               onPressed: () => onOpenRepository(context),
               icon: const Icon(Icons.code_outlined),
-              label: Text(localized('View Source', 'Kaynagi Goruntule')),
+              label: Text(localized('View Source', 'Kaynağı Görüntüle')),
             ),
           ],
         ),

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/localization/app_language.dart';
@@ -25,7 +26,7 @@ class ContactPreviewSection extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                localized('Let\'s Connect', 'Baglanti Kuralim'),
+                localized('Let\'s Connect', 'Bağlantı Kuralım'),
                 style: theme.textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
@@ -33,7 +34,7 @@ class ContactPreviewSection extends StatelessWidget {
               Text(
                 localized(
                   'Follow my current work through GitHub and LinkedIn.',
-                  'Guncel calismalarimi GitHub ve LinkedIn uzerinden takip edebilirsin.',
+                  'Güncel çalışmalarımı GitHub ve LinkedIn üzerinden takip edebilirsin.',
                 ),
                 style: theme.textTheme.bodyLarge,
                 textAlign: TextAlign.center,
@@ -41,10 +42,10 @@ class ContactPreviewSection extends StatelessWidget {
               const SizedBox(height: AppConstants.spaceXl),
               ElevatedButton.icon(
                 onPressed: () {
-                  Navigator.of(context).pushNamed(AppRoutes.contact);
+                  context.go(AppRoutes.contact);
                 },
                 icon: const Icon(Icons.forum_outlined),
-                label: Text(localized('Contact Details', 'Iletisim Bilgileri')),
+                label: Text(localized('Contact Details', 'İletişim Bilgileri')),
               ),
             ],
           ),

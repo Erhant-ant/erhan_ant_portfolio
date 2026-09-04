@@ -14,7 +14,7 @@ class AboutScreen extends StatelessWidget {
 
     return AppScaffold(
       pageTitleBuilder: () =>
-          localized('About | Erhan Ant', 'Hakkimda | Erhan Ant'),
+          localized('About | Erhan Ant', 'Hakkımda | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),

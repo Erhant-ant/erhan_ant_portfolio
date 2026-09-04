@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_constants.dart';
 import '../../../../core/localization/app_language.dart';
@@ -127,7 +128,7 @@ class _HeroContent extends StatelessWidget {
         ),
         const SizedBox(height: AppConstants.spaceLg),
         Text(
-          localized('Technology,\nwith purpose.', 'Teknoloji,\namacla.'),
+          localized('Technology,\nwith purpose.', 'Teknoloji,\namaçla.'),
           style: theme.textTheme.displayMedium?.copyWith(
             fontSize: 44,
             fontWeight: FontWeight.w800,
@@ -153,7 +154,7 @@ class _HeroContent extends StatelessWidget {
           child: Text(
             localized(
               'I build practical software projects while developing skills in IT support, systems, and modern web development.',
-              'IT destek, sistemler ve modern web gelistirme alanlarinda becerilerimi gelistirirken pratik yazilim projeleri uretiyorum.',
+              'IT destek, sistemler ve modern web geliştirme alanlarında becerilerimi geliştirirken pratik yazılım projeleri üretiyorum.',
             ),
             style: theme.textTheme.bodyLarge?.copyWith(
               color: theme.colorScheme.onSurface.withValues(alpha: 0.78),
@@ -177,27 +178,27 @@ class _HeroContent extends StatelessWidget {
           children: [
             ElevatedButton.icon(
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.projects);
+                context.go(AppRoutes.projects);
               },
               icon: const Icon(Icons.arrow_outward),
-              label: Text(localized('Explore Projects', 'Projeleri Kesfet')),
+              label: Text(localized('Explore Projects', 'Projeleri Keşfet')),
             ),
             OutlinedButton.icon(
               onPressed: () {
-                Navigator.of(context).pushNamed(AppRoutes.about);
+                context.go(AppRoutes.about);
               },
               icon: const Icon(Icons.person_outline),
-              label: Text(localized('About Me', 'Hakkimda')),
+              label: Text(localized('About Me', 'Hakkımda')),
             ),
           ],
         ),
         const SizedBox(height: AppConstants.spaceLg),
         TextButton.icon(
           onPressed: () {
-            Navigator.of(context).pushNamed(AppRoutes.certificates);
+            context.go(AppRoutes.certificates);
           },
           icon: const Icon(Icons.school_outlined),
-          label: Text(localized('View learning journey', 'Ogrenme yolculugumu gor')),
+          label: Text(localized('View learning journey', 'Öğrenme yolculuğumu gör')),
         ),
       ],
     );
@@ -332,7 +333,7 @@ class _ProfilePanel extends StatelessWidget {
                   Icon(Icons.bolt_outlined, size: 18, color: accent),
                   const SizedBox(width: AppConstants.spaceSm),
                   Text(
-                    localized('Building in public', 'Ureterek ogreniyor'),
+                    localized('Building in public', 'Üreterek öğreniyor'),
                     style: theme.textTheme.bodyMedium?.copyWith(
                       fontWeight: FontWeight.w700,
                     ),

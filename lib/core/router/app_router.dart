@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../presentation/screens/about/about_screen.dart';
 import '../../presentation/screens/certificates/certificates_screen.dart';
@@ -21,49 +22,34 @@ class AppRoutes {
 class AppRouter {
   AppRouter._();
 
-  static Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case AppRoutes.home:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const HomeScreen(),
-        );
-
-      case AppRoutes.about:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const AboutScreen(),
-        );
-
-      case AppRoutes.projects:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const ProjectsScreen(),
-        );
-
-      case AppRoutes.certificates:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const CertificatesScreen(),
-        );
-
-      case AppRoutes.cv:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const CvScreen(),
-        );
-
-      case AppRoutes.contact:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const ContactScreen(),
-        );
-
-      default:
-        return MaterialPageRoute(
-          settings: settings,
-          builder: (context) => const HomeScreen(),
-        );
-    }
-  }
+  static final GoRouter router = GoRouter(
+    initialLocation: AppRoutes.home,
+    routes: [
+      GoRoute(
+        path: AppRoutes.home,
+        builder: (context, state) => const HomeScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.about,
+        builder: (context, state) => const AboutScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.projects,
+        builder: (context, state) => const ProjectsScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.certificates,
+        builder: (context, state) => const CertificatesScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.cv,
+        builder: (context, state) => const CvScreen(),
+      ),
+      GoRoute(
+        path: AppRoutes.contact,
+        builder: (context, state) => const ContactScreen(),
+      ),
+    ],
+    errorBuilder: (context, state) => const HomeScreen(),
+  );
 }

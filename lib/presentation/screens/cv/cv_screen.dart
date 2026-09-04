@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
@@ -29,7 +30,7 @@ class CvScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    localized('CV Summary', 'CV Ozeti'),
+                    localized('CV Summary', 'CV Özeti'),
                     style: theme.textTheme.displayLarge,
                   ),
                   const SizedBox(height: AppConstants.spaceMd),
@@ -98,7 +99,7 @@ class CvScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: AppConstants.space2Xl),
                   Text(
-                    localized('Ongoing Learning', 'Devam Eden Egitimler'),
+                    localized('Ongoing Learning', 'Devam Eden Eğitimler'),
                     style: theme.textTheme.displaySmall,
                   ),
                   const SizedBox(height: AppConstants.spaceMd),
@@ -114,14 +115,14 @@ class CvScreen extends StatelessWidget {
                       const Chip(label: Text('Firebase')),
                       Chip(
                         label: Text(
-                          localized('AI Tools', 'Yapay Zeka Araclari'),
+                          localized('AI Tools', 'Yapay Zeka Araçları'),
                         ),
                       ),
                     ],
                   ),
                   const SizedBox(height: AppConstants.space2Xl),
                   Text(
-                    localized('Education', 'Egitim'),
+                    localized('Education', 'Eğitim'),
                     style: theme.textTheme.displaySmall,
                   ),
                   const SizedBox(height: AppConstants.spaceMd),
@@ -134,7 +135,7 @@ class CvScreen extends StatelessWidget {
                           subtitle: Text(
                             localized(
                               'Associate Degree in Computer Science, Ongoing',
-                              'Bilgisayar Bilimleri On Lisans Derecesi, Devam ',
+                              'Bilgisayar Bilimleri Ön Lisans Derecesi, Devam ',
                             ),
                           ),
                         ),
@@ -145,7 +146,7 @@ class CvScreen extends StatelessWidget {
                           subtitle: Text(
                             localized(
                               'Bachelor\'s Degree in Business Administration, 2018',
-                              'Isletme Lisans Programi, 2018',
+                              'İşletme Lisans Programı, 2018',
                             ),
                           ),
                         ),
@@ -171,7 +172,7 @@ class CvScreen extends StatelessWidget {
                       subtitle: Text(
                         localized(
                           'Warehouse Associate, 2024 - 2025. Supported daily operations, digital process tracking, inventory control, and shipping workflows.',
-                          'Warehouse Associate, 2024 - 2025. Gunluk operasyonlar, dijital surec takibi, stok kontrolu ve sevkiyat is akislari icinde gorev aldim.',
+                          'Warehouse Associate, 2024 - 2025. Günlük operasyonlar, dijital süreç takibi, stok kontrolü ve sevkiyat iş akışları içinde görev aldım.',
                         ),
                       ),
                     ),
@@ -190,11 +191,11 @@ class CvScreen extends StatelessWidget {
                       ),
                       OutlinedButton.icon(
                         onPressed: () {
-                          Navigator.of(context).pushNamed(AppRoutes.contact);
+                          context.go(AppRoutes.contact);
                         },
                         icon: const Icon(Icons.forum_outlined),
                         label: Text(
-                          localized('Contact Details', 'Iletisim Bilgileri'),
+                          localized('Contact Details', 'İletişim Bilgileri'),
                         ),
                       ),
                     ],

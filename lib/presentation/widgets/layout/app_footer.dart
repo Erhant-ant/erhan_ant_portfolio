@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
@@ -37,7 +38,7 @@ class AppFooter extends StatelessWidget {
               Text(
                 localized(
                   'Learning, building, and growing.',
-                  'Ogreniyor, uretiyor, gelisiyor.',
+                  'Öğreniyor, üretiyor, gelişiyor.',
                 ),
                 style: theme.textTheme.bodyMedium,
               ),
@@ -48,16 +49,16 @@ class AppFooter extends StatelessWidget {
                 runSpacing: AppConstants.spaceSm,
                 children: [
                   _FooterLink(label: localized('Home', 'Ana Sayfa'), route: '/'),
-                  _FooterLink(label: localized('About', 'Hakkimda'), route: '/about'),
+                  _FooterLink(label: localized('About', 'Hakkımda'), route: '/about'),
                   _FooterLink(label: localized('Projects', 'Projeler'), route: '/projects'),
-                  _FooterLink(label: localized('Learning', 'Egitimler'), route: '/certificates'),
+                  _FooterLink(label: localized('Learning', 'Eğitimler'), route: '/certificates'),
                   const _FooterLink(label: 'CV', route: '/cv'),
-                  _FooterLink(label: localized('Contact', 'Iletisim'), route: '/contact'),
+                  _FooterLink(label: localized('Contact', 'İletişim'), route: '/contact'),
                 ],
               ),
               const SizedBox(height: AppConstants.spaceLg),
               Text(
-                '2026 Erhan Ant. ${localized('All rights reserved.', 'Tum haklari saklidir.')}',
+                '2026 Erhan Ant. ${localized('All rights reserved.', 'Tüm hakları saklıdır.')}',
                 style: theme.textTheme.bodyMedium,
                 textAlign: TextAlign.center,
               ),
@@ -79,7 +80,7 @@ class _FooterLink extends StatelessWidget {
   Widget build(BuildContext context) {
     return TextButton(
       onPressed: () {
-        Navigator.of(context).pushNamedAndRemoveUntil(route, (route) => route.isFirst);
+        context.go(route);
       },
       child: Text(label),
     );

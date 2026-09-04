@@ -71,7 +71,7 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
           child: Column(
             children: [
               Text(
-                localized('Current Focus', 'Su Anki Odak'),
+                localized('Current Focus', 'Şu Anki Odak'),
                 style: theme.textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
@@ -79,7 +79,7 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
               Text(
                 localized(
                   'Move across a focus area to explore what I am building and learning.',
-                  'Uzerine gelerek urettigim ve ogrendigim alanlari kesfet.',
+                  'Üzerine gelerek ürettiğim ve öğrendiğim alanları keşfet.',
                 ),
                 style: theme.textTheme.bodyLarge,
                 textAlign: TextAlign.center,
@@ -179,7 +179,7 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
         title: 'Flutter',
         description: localized(
           'Building responsive interfaces for web and mobile.',
-          'Web ve mobil icin responsive arayuzler gelistiriyorum.',
+          'Web ve mobil için responsive arayüzler geliştiriyorum.',
         ),
         color: theme.colorScheme.secondary,
       ),
@@ -188,16 +188,16 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
         title: localized('IT Support', 'IT Destek'),
         description: localized(
           'Strengthening practical skills in systems, networks, and support workflows.',
-          'Sistemler, aglar ve destek is akislarinda pratik becerilerimi guclendiriyorum.',
+          'Sistemler, ağlar ve destek iş akışlarında pratik becerilerimi güçlendiriyorum.',
         ),
         color: theme.colorScheme.primary,
       ),
       _FocusItem(
         icon: Icons.psychology_outlined,
-        title: localized('AI Tools', 'Yapay Zeka Araclari'),
+        title: localized('AI Tools', 'Yapay Zeka Araçları'),
         description: localized(
           'Exploring useful AI tools and practical application ideas.',
-          'Kullanilabilir yapay zeka araclarini ve pratik uygulama fikirlerini kesfediyorum.',
+          'Kullanılabilir yapay zeka araçlarını ve pratik uygulama fikirlerini keşfediyorum.',
         ),
         color: theme.colorScheme.tertiary,
       ),

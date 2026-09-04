@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
@@ -14,7 +15,7 @@ class CertificatesScreen extends StatelessWidget {
 
     return AppScaffold(
       pageTitleBuilder: () =>
-          localized('Learning | Erhan Ant', 'Egitimler | Erhan Ant'),
+          localized('Learning | Erhan Ant', 'Eğitimler | Erhan Ant'),
       body: ListView(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
@@ -26,114 +27,121 @@ class CertificatesScreen extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 800),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    localized(
-                      'Certificates and Learning',
-                      'Sertifikalar ve Egitimler',
+                children: AnimateList(
+                  interval: 100.ms,
+                  effects: [
+                    FadeEffect(duration: 500.ms, curve: Curves.easeOut),
+                    SlideEffect(begin: const Offset(0, 0.05), duration: 500.ms, curve: Curves.easeOut),
+                  ],
+                  children: [
+                    Text(
+                      localized(
+                        'Certificates and Learning',
+                        'Sertifikalar ve Eğitimler',
+                      ),
+                      style: theme.textTheme.displayLarge,
                     ),
-                    style: theme.textTheme.displayLarge,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  Text(
-                    localized(
-                      'Completed certifications and the technical subjects I am currently developing.',
-                      'Tamamladigim sertifikalar ve su anda gelistirdigim teknik alanlar.',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    Text(
+                      localized(
+                        'Completed certifications and the technical subjects I am currently developing.',
+                        'Tamamladığım sertifikalar ve şu anda geliştirdiğim teknik alanlar.',
+                      ),
+                      style: theme.textTheme.bodyLarge,
                     ),
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: AppConstants.space2Xl),
-                  Text(
-                    localized(
-                      'Completed Certification',
-                      'Tamamlanan Sertifika',
+                    const SizedBox(height: AppConstants.space2Xl),
+                    Text(
+                      localized(
+                        'Completed Certification',
+                        'Tamamlanan Sertifika',
+                      ),
+                      style: theme.textTheme.displaySmall,
                     ),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.verified_outlined,
-                    title: 'Google IT Support Professional Certificate',
-                    platform: 'Coursera',
-                    description: localized(
-                      'Completed professional certificate covering IT support fundamentals, troubleshooting, operating systems, networking, and system administration.',
-                      'IT destek temelleri, sorun giderme, isletim sistemleri, aglar ve sistem yonetimini kapsayan profesyonel sertifika.',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.verified_outlined,
+                      title: 'Google IT Support Professional Certificate',
+                      platform: 'Coursera',
+                      description: localized(
+                        'Completed professional certificate covering IT support fundamentals, troubleshooting, operating systems, networking, and system administration.',
+                        'IT destek temelleri, sorun giderme, işletim sistemleri, ağlar ve sistem yönetimini kapsayan profesyonel sertifika.',
+                      ),
+                      status: localized('Completed', 'Tamamlandı'),
+                      statusIcon: Icons.check_circle_outline,
                     ),
-                    status: localized('Completed', 'Tamamlandi'),
-                    statusIcon: Icons.check_circle_outline,
-                  ),
-                  const SizedBox(height: AppConstants.space2Xl),
-                  Text(
-                    localized('Ongoing Learning', 'Devam Eden Egitimler'),
-                    style: theme.textTheme.displaySmall,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.memory_outlined,
-                    title: 'Siemens PLC and TIA Portal Essentials',
-                    platform: 'Coursera',
-                    description: localized(
-                      'Learning basic PLC programming and industrial automation workflows with Siemens TIA Portal.',
-                      'Siemens TIA Portal ile temel PLC programlama ve endustriyel otomasyon is akislari ogreniyorum.',
+                    const SizedBox(height: AppConstants.space2Xl),
+                    Text(
+                      localized('Ongoing Learning', 'Devam Eden Eğitimler'),
+                      style: theme.textTheme.displaySmall,
                     ),
-                    status: localized('In progress', 'Devam ediyor'),
-                    statusIcon: Icons.autorenew,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.bar_chart_outlined,
-                    title: 'Microsoft Data Analyst',
-                    platform: 'Microsoft',
-                    description: localized(
-                      'Developing foundational skills in data analysis, reporting, and data-driven decision making.',
-                      'Veri analizi, raporlama ve veri odakli karar verme konusunda temel beceriler gelistiriyorum.',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.memory_outlined,
+                      title: 'Siemens PLC and TIA Portal Essentials',
+                      platform: 'Coursera',
+                      description: localized(
+                        'Learning basic PLC programming and industrial automation workflows with Siemens TIA Portal.',
+                        'Siemens TIA Portal ile temel PLC programlama ve endüstriyel otomasyon iş akışları öğreniyorum.',
+                      ),
+                      status: localized('In progress', 'Devam ediyor'),
+                      statusIcon: Icons.autorenew,
                     ),
-                    status: localized('In progress', 'Devam ediyor'),
-                    statusIcon: Icons.autorenew,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.business_center_outlined,
-                    title: 'Microsoft 365 Fundamentals',
-                    platform: 'Microsoft',
-                    description: localized(
-                      'Learning core Microsoft 365 services and workplace productivity tools.',
-                      'Temel Microsoft 365 servisleri ve is yeri verimlilik araclari uzerine calisiyorum.',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.bar_chart_outlined,
+                      title: 'Microsoft Data Analyst',
+                      platform: 'Microsoft',
+                      description: localized(
+                        'Developing foundational skills in data analysis, reporting, and data-driven decision making.',
+                        'Veri analizi, raporlama ve veri odaklı karar verme konusunda temel beceriler geliştiriyorum.',
+                      ),
+                      status: localized('In progress', 'Devam ediyor'),
+                      statusIcon: Icons.autorenew,
                     ),
-                    status: localized('In progress', 'Devam ediyor'),
-                    statusIcon: Icons.autorenew,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.storage_outlined,
-                    title: 'SQL Fundamentals',
-                    platform: 'BTK Akademi',
-                    description: localized(
-                      'Building practical knowledge of SQL queries and relational database fundamentals.',
-                      'SQL sorgulari ve iliskisel veritabani temelleri konusunda pratik bilgi gelistiriyorum.',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.business_center_outlined,
+                      title: 'Microsoft 365 Fundamentals',
+                      platform: 'Microsoft',
+                      description: localized(
+                        'Learning core Microsoft 365 services and workplace productivity tools.',
+                        'Temel Microsoft 365 servisleri ve iş yeri verimlilik araçları üzerine çalışıyorum.',
+                      ),
+                      status: localized('In progress', 'Devam ediyor'),
+                      statusIcon: Icons.autorenew,
                     ),
-                    status: localized('In progress', 'Devam ediyor'),
-                    statusIcon: Icons.autorenew,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  _LearningCard(
-                    icon: Icons.flutter_dash,
-                    title: localized(
-                      'Flutter Development',
-                      'Flutter Uygulama Gelistirme',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.storage_outlined,
+                      title: 'SQL Fundamentals',
+                      platform: 'BTK Akademi',
+                      description: localized(
+                        'Building practical knowledge of SQL queries and relational database fundamentals.',
+                        'SQL sorguları ve ilişkisel veritabanı temelleri konusunda pratik bilgi geliştiriyorum.',
+                      ),
+                      status: localized('In progress', 'Devam ediyor'),
+                      statusIcon: Icons.autorenew,
                     ),
-                    platform: localized(
-                      'Personal projects',
-                      'Kisisel projeler',
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _LearningCard(
+                      icon: Icons.flutter_dash,
+                      title: localized(
+                        'Flutter Development',
+                        'Flutter Uygulama Geliştirme',
+                      ),
+                      platform: localized(
+                        'Personal projects',
+                        'Kişisel projeler',
+                      ),
+                      description: localized(
+                        'Building responsive Flutter web applications through hands-on portfolio projects.',
+                        'Portfolyo projeleriyle responsive Flutter web uygulamaları geliştiriyorum.',
+                      ),
+                      status: localized('Active learning', 'Aktif çalışıyorum'),
+                      statusIcon: Icons.autorenew,
                     ),
-                    description: localized(
-                      'Building responsive Flutter web applications through hands-on portfolio projects.',
-                      'Portfolyo projeleriyle responsive Flutter web uygulamalari gelistiriyorum.',
-                    ),
-                    status: localized('Active learning', 'Aktif calisiyorum'),
-                    statusIcon: Icons.autorenew,
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

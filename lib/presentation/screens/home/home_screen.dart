@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
@@ -16,13 +17,20 @@ class HomeScreen extends StatelessWidget {
       pageTitleBuilder: () => 'Erhan Ant | Flutter & IT Portfolio',
       body: SingleChildScrollView(
         child: Column(
-          children: [
-            const HeroSection(),
-            const CurrentFocusSection(),
-            const FeaturedProjectSection(),
-            const ContactPreviewSection(),
-            const AppFooter(),
-          ],
+          children: AnimateList(
+            interval: 150.ms,
+            effects: [
+              FadeEffect(duration: 600.ms, curve: Curves.easeOut),
+              SlideEffect(begin: const Offset(0, 0.1), duration: 600.ms, curve: Curves.easeOut),
+            ],
+            children: [
+              const HeroSection(),
+              const CurrentFocusSection(),
+              const FeaturedProjectSection(),
+              const ContactPreviewSection(),
+              const AppFooter(),
+            ],
+          ),
         ),
       ),
     );

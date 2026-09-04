@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
@@ -28,7 +29,7 @@ class AppScaffold extends StatelessWidget {
             titleSpacing: Responsive.pagePadding(context),
             title: TextButton(
               onPressed: () {
-                Navigator.of(context).popUntil((route) => route.isFirst);
+                context.go('/');
               },
               style: TextButton.styleFrom(
                 padding: EdgeInsets.zero,
@@ -43,18 +44,18 @@ class AppScaffold extends StatelessWidget {
             ),
             actions: [
               if (!isMobile) ...[
-                _HeaderLink(label: localized('About', 'Hakkimda'), route: '/about'),
+                _HeaderLink(label: localized('About', 'Hakkımda'), route: '/about'),
                 _HeaderLink(
                   label: localized('Projects', 'Projeler'),
                   route: '/projects',
                 ),
                 _HeaderLink(
-                  label: localized('Learning', 'Egitimler'),
+                  label: localized('Learning', 'Eğitimler'),
                   route: '/certificates',
                 ),
                 const _HeaderLink(label: 'CV', route: '/cv'),
                 _HeaderLink(
-                  label: localized('Contact', 'Iletisim'),
+                  label: localized('Contact', 'İletişim'),
                   route: '/contact',
                 ),
               ],
@@ -72,7 +73,7 @@ class AppScaffold extends StatelessWidget {
                     CheckedPopupMenuItem(
                       value: AppLanguage.turkish,
                       checked: language == AppLanguage.turkish,
-                      child: const Text('Turkce'),
+                      child: const Text('Türkçe'),
                     ),
                   ];
                 },
@@ -88,7 +89,7 @@ class AppScaffold extends StatelessWidget {
 
                     return IconButton(
                       tooltip: isDark
-                          ? localized('Light theme', 'Aydinlik tema')
+                          ? localized('Light theme', 'Aydınlık tema')
                           : localized('Dark theme', 'Koyu tema'),
                       onPressed: themeController.toggle,
                       icon: Icon(
@@ -129,9 +130,7 @@ class _HeaderLink extends StatelessWidget {
     return TextButton(
       onPressed: () {
         if (!isActive) {
-          Navigator.of(
-            context,
-          ).pushNamedAndRemoveUntil(route, (route) => route.isFirst);
+          context.go(route);
         }
       },
       style: TextButton.styleFrom(
@@ -171,7 +170,7 @@ class _MobileMenu extends StatelessWidget {
             ),
             _MobileMenuItem(
               icon: Icons.person_outline,
-              label: localized('About', 'Hakkimda'),
+              label: localized('About', 'Hakkımda'),
               route: '/about',
             ),
             _MobileMenuItem(
@@ -181,12 +180,12 @@ class _MobileMenu extends StatelessWidget {
             ),
             _MobileMenuItem(
               icon: Icons.school_outlined,
-              label: localized('Learning', 'Egitimler'),
+              label: localized('Learning', 'Eğitimler'),
               route: '/certificates',
             ),
             _MobileMenuItem(
               icon: Icons.forum_outlined,
-              label: localized('Contact', 'Iletisim'),
+              label: localized('Contact', 'İletişim'),
               route: '/contact',
             ),
             _MobileMenuItem(
@@ -232,9 +231,7 @@ class _MobileMenuItem extends StatelessWidget {
         Navigator.of(context).pop();
 
         if (!isActive) {
-          Navigator.of(
-            context,
-          ).pushNamedAndRemoveUntil(route, (route) => route.isFirst);
+          context.go(route);
         }
       },
     );

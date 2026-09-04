@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
@@ -16,7 +17,7 @@ class ProjectsScreen extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         SnackBar(
           content: Text(
-            localized('The link could not be opened.', 'Baglanti acilamadi.'),
+            localized('The link could not be opened.', 'Bağlantı açılamadı.'),
           ),
         ),
       );
@@ -32,29 +33,29 @@ class ProjectsScreen extends StatelessWidget {
         'title': 'SupportDesk',
         'description': localized(
           'A bilingual IT support ticket management application for small and medium-sized organizations. It supports ticket creation, priorities, status workflows, technician notes, search, and an operational dashboard.',
-          'Kucuk ve orta olcekli kurumlar icin iki dilli IT destek talep yonetim uygulamasi. Ticket olusturma, oncelikler, durum akislari, teknisyen notlari, arama ve operasyon paneli sunar.',
+          'Talep yaşam döngüsünü merkeze alan iki dilli (İngilizce/Türkçe) bir yönetim paneli. Kullanıcılar kolayca talep oluştururken, yöneticiler durum, öncelik ve atamaları net bir arayüzden takip edebiliyor.',
         ),
         'caseStudy': {
           'problem': localized(
             'IT requests can be lost across chat messages, email, phone calls, and informal conversations.',
-            'IT talepleri sohbet mesajlari, e-posta, telefon gorusmeleri ve kayit disi konusmalar arasinda kaybolabilir.',
+            'Dağınık destek taleplerini, cihaz ve sistem kurulumlarını takip etmek için basit, şeffaf bir yöntem eksikliği. E-postalar ve fiziksel notlar iş akışlarını yavaşlatıyor.',
           ),
           'solution': localized(
             'SupportDesk records each request in one place so the team can prioritize, track, and resolve work clearly.',
-            'SupportDesk, her talebi tek yerde kaydederek ekibin isleri onceliklendirmesini, takip etmesini ve net bicimde cozumlemesini saglar.',
+            'SupportDesk, her talebi tek yerde kaydederek ekibin işleri önceliklendirmesini, takip etmesini ve net biçimde çözümlemesini sağlar.',
           ),
           'features': [
             localized(
               'Ticket creation with priority, category, department, and device details',
-              'Oncelik, kategori, departman ve cihaz bilgileriyle ticket olusturma',
+              'Özel IT Destek Panosu: Açık/Kapalı talep ayrımı, hızlı durum güncellemeleri.',
             ),
             localized(
               'Status workflow from open to resolved and closed',
-              'Aciktan cozuldu ve kapandi durumuna uzanan is akisi',
+              'Açıktan çözüldü ve kapandı durumuna uzanan iş akışı',
             ),
             localized(
               'Technician notes, search, and a dashboard for operational visibility',
-              'Teknisyen notlari, arama ve operasyon gorunurlugu icin dashboard',
+              'Teknisyen notları, arama ve operasyon görünürlüğü için dashboard',
             ),
           ],
         },
@@ -62,18 +63,18 @@ class ProjectsScreen extends StatelessWidget {
         'url': 'https://github.com/Erhant-ant/it_support_ticket_tracker',
       },
       {
-        'title': localized('Personal Portfolio', 'Kisisel Portfolyo'),
+        'title': localized('Personal Portfolio', 'Kişisel Portfolyo'),
         'description': localized(
           'A responsive Flutter web portfolio that presents my background, skills, and learning progress.',
-          'Gecmisimi, yetkinliklerimi ve gelisim surecimi sunan responsive Flutter web portfolyosu.',
+          'Teknik projelerimi ve devam eden IT eğitimlerimi modern, akıcı bir arayüzle sunan, duyarlı (responsive) kişisel web sitem.',
         ),
         'tags': ['Flutter', 'Web'],
       },
       {
-        'title': localized('Tip Calculator', 'Bahsis Hesaplayici'),
+        'title': localized('Tip Calculator', 'Bahşiş Hesaplayıcı'),
         'description': localized(
           'A simple Python command-line application that calculates a tip amount and total bill.',
-          'Bahsis tutarini ve toplam hesabi hesaplayan basit bir Python komut satiri uygulamasi.',
+          'Yemek hesaplarını bölüştürmeyi ve bahşiş hesaplamayı kolaylaştıran, temiz ve kullanıcı dostu arayüze sahip pratik mobil uygulama.',
         ),
         'tags': ['Python', 'CLI'],
         'url': 'https://github.com/Erhant-ant/tip-calculator',
@@ -94,34 +95,41 @@ class ProjectsScreen extends StatelessWidget {
               constraints: const BoxConstraints(maxWidth: 900),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Text(
-                    localized('Projects', 'Projeler'),
-                    style: theme.textTheme.displayLarge,
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  Text(
-                    localized(
-                      'Portfolio work and practical projects from my software learning journey.',
-                      'Yazilim ogrenme surecimde gelistirdigim portfolyo ve pratik projeler.',
+                children: AnimateList(
+                  interval: 100.ms,
+                  effects: [
+                    FadeEffect(duration: 500.ms, curve: Curves.easeOut),
+                    SlideEffect(begin: const Offset(0, 0.05), duration: 500.ms, curve: Curves.easeOut),
+                  ],
+                  children: [
+                    Text(
+                      localized('Projects', 'Projeler'),
+                      style: theme.textTheme.displayLarge,
                     ),
-                    style: theme.textTheme.bodyLarge,
-                  ),
-                  const SizedBox(height: AppConstants.space2Xl),
-                  ...projects.map(
-                    (project) =>
-                        _ProjectCard(project: project, onOpenLink: _openLink),
-                  ),
-                  const SizedBox(height: AppConstants.spaceMd),
-                  OutlinedButton.icon(
-                    onPressed: () =>
-                        _openLink(context, 'https://github.com/Erhant-ant'),
-                    icon: const Icon(Icons.code),
-                    label: Text(
-                      localized('Open GitHub Profile', 'GitHub Profilimi Ac'),
+                    const SizedBox(height: AppConstants.spaceMd),
+                    Text(
+                      localized(
+                        'Portfolio work and practical projects from my software learning journey.',
+                        'Yazılım öğrenme sürecimde geliştirdiğim portfolyo ve pratik projeler.',
+                      ),
+                      style: theme.textTheme.bodyLarge,
                     ),
-                  ),
-                ],
+                    const SizedBox(height: AppConstants.space2Xl),
+                    ...projects.map(
+                      (project) =>
+                          _ProjectCard(project: project, onOpenLink: _openLink),
+                    ),
+                    const SizedBox(height: AppConstants.spaceMd),
+                    OutlinedButton.icon(
+                      onPressed: () =>
+                          _openLink(context, 'https://github.com/Erhant-ant'),
+                      icon: const Icon(Icons.code),
+                      label: Text(
+                        localized('Open GitHub Profile', 'GitHub Profilimi Aç'),
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
           ),
@@ -168,7 +176,7 @@ class _ProjectCard extends StatelessWidget {
               if (caseStudy != null) ...[
                 const SizedBox(height: AppConstants.spaceXl),
                 _CaseStudyLabel(
-                  label: localized('Business Problem', 'Is Problemi'),
+                  label: localized('Business Problem', 'İş Problemi'),
                 ),
                 const SizedBox(height: AppConstants.spaceXs),
                 Text(
@@ -176,7 +184,7 @@ class _ProjectCard extends StatelessWidget {
                   style: theme.textTheme.bodyMedium,
                 ),
                 const SizedBox(height: AppConstants.spaceLg),
-                _CaseStudyLabel(label: localized('Solution', 'Cozum')),
+                _CaseStudyLabel(label: localized('Solution', 'Çözüm')),
                 const SizedBox(height: AppConstants.spaceXs),
                 Text(
                   caseStudy['solution'] as String,
@@ -184,7 +192,7 @@ class _ProjectCard extends StatelessWidget {
                 ),
                 const SizedBox(height: AppConstants.spaceLg),
                 _CaseStudyLabel(
-                  label: localized('Key Features', 'Temel Ozellikler'),
+                  label: localized('Key Features', 'Temel Özellikler'),
                 ),
                 const SizedBox(height: AppConstants.spaceSm),
                 ...((caseStudy['features'] as List<String>).map(
@@ -227,7 +235,7 @@ class _ProjectCard extends StatelessWidget {
                       onOpenLink(context, project['url'] as String),
                   icon: const Icon(Icons.open_in_new),
                   label: Text(
-                    localized('View on GitHub', 'GitHub\'da Goruntule'),
+                    localized('View on GitHub', 'GitHub\'da Görüntüle'),
                   ),
                 ),
               ],
