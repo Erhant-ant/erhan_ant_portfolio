@@ -27,29 +27,68 @@ class AppRouter {
     routes: [
       GoRoute(
         path: AppRoutes.home,
-        builder: (context, state) => const HomeScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const HomeScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.about,
-        builder: (context, state) => const AboutScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const AboutScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.projects,
-        builder: (context, state) => const ProjectsScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const ProjectsScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.certificates,
-        builder: (context, state) => const CertificatesScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const CertificatesScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.cv,
-        builder: (context, state) => const CvScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const CvScreen(),
+        ),
       ),
       GoRoute(
         path: AppRoutes.contact,
-        builder: (context, state) => const ContactScreen(),
+        pageBuilder: (context, state) => _fadeTransitionPage(
+          key: state.pageKey,
+          child: const ContactScreen(),
+        ),
       ),
     ],
     errorBuilder: (context, state) => const HomeScreen(),
   );
+
+  static CustomTransitionPage<void> _fadeTransitionPage({
+    required LocalKey key,
+    required Widget child,
+  }) {
+    return CustomTransitionPage<void>(
+      key: key,
+      child: child,
+      transitionDuration: const Duration(milliseconds: 280),
+      reverseTransitionDuration: const Duration(milliseconds: 200),
+      transitionsBuilder: (context, animation, secondaryAnimation, child) {
+        return FadeTransition(
+          opacity: CurvedAnimation(
+            parent: animation,
+            curve: Curves.easeOut,
+          ),
+          child: child,
+        );
+      },
+    );
+  }
 }

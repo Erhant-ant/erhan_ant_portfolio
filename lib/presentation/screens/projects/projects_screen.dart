@@ -59,6 +59,7 @@ class ProjectsScreen extends StatelessWidget {
             ),
           ],
         },
+        'icon': Icons.support_agent_outlined,
         'tags': ['Flutter', 'Dart', 'State Management', 'Web'],
         'url': 'https://github.com/Erhant-ant/it_support_ticket_tracker',
       },
@@ -68,16 +69,44 @@ class ProjectsScreen extends StatelessWidget {
           'A responsive Flutter web portfolio that presents my background, skills, and learning progress.',
           'Teknik projelerimi ve devam eden IT eğitimlerimi modern, akıcı bir arayüzle sunan, duyarlı (responsive) kişisel web sitem.',
         ),
+        'icon': Icons.web_outlined,
         'tags': ['Flutter', 'Web'],
       },
       {
-        'title': localized('Tip Calculator', 'Bahşiş Hesaplayıcı'),
-        'description': localized(
-          'A simple Python command-line application that calculates a tip amount and total bill.',
-          'Yemek hesaplarını bölüştürmeyi ve bahşiş hesaplamayı kolaylaştıran, temiz ve kullanıcı dostu arayüze sahip pratik mobil uygulama.',
+        'title': localized(
+          'Student Learning Tools',
+          'Öğrenci Eğitim Araçları',
         ),
-        'tags': ['Python', 'CLI'],
-        'url': 'https://github.com/Erhant-ant/tip-calculator',
+        'description': localized(
+          'Custom-built educational applications designed for students to support their coursework and learning goals. These tools focus on interactive practice, clear visual feedback, and making study sessions more effective.',
+          'Öğrencilerin ders çalışmalarını ve öğrenme hedeflerini desteklemek için özel olarak geliştirilen eğitim uygulamaları. Bu araçlar interaktif pratik, net görsel geri bildirim ve çalışma seanslarını daha verimli hale getirmeye odaklanıyor.',
+        ),
+        'caseStudy': {
+          'problem': localized(
+            'Students often struggle with repetitive study tasks and lack engaging, personalized tools to reinforce what they learn in class.',
+            'Öğrenciler tekrarlayan çalışma görevlerinde zorlanıyor ve derste öğrendiklerini pekiştirmek için ilgi çekici, kişiselleştirilmiş araçlardan yoksun kalıyor.',
+          ),
+          'solution': localized(
+            'I build focused, easy-to-use study applications tailored to individual student needs, turning routine practice into a more interactive experience.',
+            'Bireysel öğrenci ihtiyaçlarına göre odaklanmış, kullanımı kolay çalışma uygulamaları geliştirerek rutin pratiği daha interaktif bir deneyime dönüştürüyorum.',
+          ),
+          'features': [
+            localized(
+              'Interactive exercises tailored to specific subjects and learning levels',
+              'Belirli konulara ve öğrenme seviyelerine göre uyarlanmış interaktif alıştırmalar',
+            ),
+            localized(
+              'Visual feedback and progress tracking to keep students motivated',
+              'Öğrencileri motive etmek için görsel geri bildirim ve ilerleme takibi',
+            ),
+            localized(
+              'Clean, distraction-free interfaces designed for focused study',
+              'Odaklanmış çalışma için tasarlanmış sade, dikkat dağıtmayan arayüzler',
+            ),
+          ],
+        },
+        'icon': Icons.school_outlined,
+        'tags': ['Flutter', 'Education', 'Private'],
       },
     ];
 
@@ -139,107 +168,161 @@ class ProjectsScreen extends StatelessWidget {
   }
 }
 
-class _ProjectCard extends StatelessWidget {
+class _ProjectCard extends StatefulWidget {
   const _ProjectCard({required this.project, required this.onOpenLink});
 
   final Map<String, Object> project;
   final Future<void> Function(BuildContext context, String url) onOpenLink;
 
   @override
+  State<_ProjectCard> createState() => _ProjectCardState();
+}
+
+class _ProjectCardState extends State<_ProjectCard> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final caseStudy = project['caseStudy'] as Map<String, Object>?;
+    final accent = theme.colorScheme.secondary;
+    final caseStudy = widget.project['caseStudy'] as Map<String, Object>?;
 
     return Padding(
       padding: const EdgeInsets.only(bottom: AppConstants.spaceMd),
-      child: Card(
-        child: Padding(
-          padding: const EdgeInsets.all(AppConstants.spaceLg),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Icon(
-                Icons.folder_open,
-                color: theme.colorScheme.secondary,
-                size: 32,
-              ),
-              const SizedBox(height: AppConstants.spaceMd),
-              Text(
-                project['title'] as String,
-                style: theme.textTheme.displaySmall,
-              ),
-              const SizedBox(height: AppConstants.spaceSm),
-              Text(
-                project['description'] as String,
-                style: theme.textTheme.bodyLarge,
-              ),
-              if (caseStudy != null) ...[
-                const SizedBox(height: AppConstants.spaceXl),
-                _CaseStudyLabel(
-                  label: localized('Business Problem', 'İş Problemi'),
+      child: MouseRegion(
+        onEnter: (_) => setState(() => _isHovered = true),
+        onExit: (_) => setState(() => _isHovered = false),
+        child: AnimatedContainer(
+          duration: AppConstants.durationNormal,
+          curve: Curves.easeOut,
+          decoration: BoxDecoration(
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(AppConstants.radiusMd),
+            border: Border.all(
+              color: _isHovered
+                  ? accent.withValues(alpha: 0.5)
+                  : theme.colorScheme.outline,
+            ),
+            boxShadow: _isHovered
+                ? [
+                    BoxShadow(
+                      color: accent.withValues(alpha: 0.10),
+                      blurRadius: 20,
+                      spreadRadius: 1,
+                    ),
+                  ]
+                : [],
+          ),
+          child: Padding(
+            padding: const EdgeInsets.all(AppConstants.spaceLg),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Icon(
+                  (widget.project['icon'] as IconData?) ?? Icons.folder_open,
+                  color: accent,
+                  size: 32,
                 ),
-                const SizedBox(height: AppConstants.spaceXs),
+                const SizedBox(height: AppConstants.spaceMd),
                 Text(
-                  caseStudy['problem'] as String,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                const SizedBox(height: AppConstants.spaceLg),
-                _CaseStudyLabel(label: localized('Solution', 'Çözüm')),
-                const SizedBox(height: AppConstants.spaceXs),
-                Text(
-                  caseStudy['solution'] as String,
-                  style: theme.textTheme.bodyMedium,
-                ),
-                const SizedBox(height: AppConstants.spaceLg),
-                _CaseStudyLabel(
-                  label: localized('Key Features', 'Temel Özellikler'),
+                  widget.project['title'] as String,
+                  style: theme.textTheme.displaySmall,
                 ),
                 const SizedBox(height: AppConstants.spaceSm),
-                ...((caseStudy['features'] as List<String>).map(
-                  (feature) => Padding(
-                    padding: const EdgeInsets.only(
-                      bottom: AppConstants.spaceSm,
-                    ),
-                    child: Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Icon(
-                          Icons.check_circle_outline,
-                          size: 18,
-                          color: theme.colorScheme.secondary,
-                        ),
-                        const SizedBox(width: AppConstants.spaceSm),
-                        Expanded(
-                          child: Text(
-                            feature,
-                            style: theme.textTheme.bodyMedium,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                )),
-              ],
-              const SizedBox(height: AppConstants.spaceLg),
-              Wrap(
-                spacing: AppConstants.spaceSm,
-                runSpacing: AppConstants.spaceSm,
-                children: (project['tags'] as List<String>)
-                    .map((tag) => Chip(label: Text(tag)))
-                    .toList(),
-              ),
-              if (project['url'] != null) ...[
-                const SizedBox(height: AppConstants.spaceLg),
-                OutlinedButton.icon(
-                  onPressed: () =>
-                      onOpenLink(context, project['url'] as String),
-                  icon: const Icon(Icons.open_in_new),
-                  label: Text(
-                    localized('View on GitHub', 'GitHub\'da Görüntüle'),
-                  ),
+                Text(
+                  widget.project['description'] as String,
+                  style: theme.textTheme.bodyLarge,
                 ),
+                if (caseStudy != null) ...[
+                  const SizedBox(height: AppConstants.spaceXl),
+                  _CaseStudyLabel(
+                    label: localized('Business Problem', 'İş Problemi'),
+                  ),
+                  const SizedBox(height: AppConstants.spaceXs),
+                  Text(
+                    caseStudy['problem'] as String,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: AppConstants.spaceLg),
+                  _CaseStudyLabel(label: localized('Solution', 'Çözüm')),
+                  const SizedBox(height: AppConstants.spaceXs),
+                  Text(
+                    caseStudy['solution'] as String,
+                    style: theme.textTheme.bodyMedium,
+                  ),
+                  const SizedBox(height: AppConstants.spaceLg),
+                  _CaseStudyLabel(
+                    label: localized('Key Features', 'Temel Özellikler'),
+                  ),
+                  const SizedBox(height: AppConstants.spaceSm),
+                  ...((caseStudy['features'] as List<String>).map(
+                    (feature) => Padding(
+                      padding: const EdgeInsets.only(
+                        bottom: AppConstants.spaceSm,
+                      ),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Icon(
+                            Icons.check_circle_outline,
+                            size: 18,
+                            color: accent,
+                          ),
+                          const SizedBox(width: AppConstants.spaceSm),
+                          Expanded(
+                            child: Text(
+                              feature,
+                              style: theme.textTheme.bodyMedium,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  )),
+                ],
+                const SizedBox(height: AppConstants.spaceLg),
+                Wrap(
+                  spacing: AppConstants.spaceSm,
+                  runSpacing: AppConstants.spaceSm,
+                  children: (widget.project['tags'] as List<String>)
+                      .map((tag) => Chip(label: Text(tag)))
+                      .toList(),
+                ),
+                if (widget.project['url'] != null) ...[
+                  const SizedBox(height: AppConstants.spaceLg),
+                  OutlinedButton.icon(
+                    onPressed: () => widget.onOpenLink(
+                      context,
+                      widget.project['url'] as String,
+                    ),
+                    icon: const Icon(Icons.open_in_new),
+                    label: Text(
+                      localized('View on GitHub', 'GitHub\'da Görüntüle'),
+                    ),
+                  ),
+                ] else ...[
+                  const SizedBox(height: AppConstants.spaceLg),
+                  Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      Icon(
+                        Icons.lock_outline,
+                        size: 16,
+                        color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                      ),
+                      const SizedBox(width: 6),
+                      Text(
+                        localized('Private repository', 'Özel depo'),
+                        style: theme.textTheme.bodyMedium?.copyWith(
+                          color: theme.colorScheme.onSurface.withValues(alpha: 0.5),
+                          fontStyle: FontStyle.italic,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),

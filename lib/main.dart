@@ -25,10 +25,10 @@ class PortfolioApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ValueListenableBuilder<AppLanguage>(
       valueListenable: appLanguageController,
-      builder: (context, language, child) {
+      builder: (context, language, _) {
         return ValueListenableBuilder<ThemeMode>(
           valueListenable: themeController,
-          builder: (context, themeMode, child) {
+          builder: (context, themeMode, _) {
             return MaterialApp.router(
               title: AppConstants.appName,
               debugShowCheckedModeBanner: false,
@@ -44,3 +44,4 @@ class PortfolioApp extends StatelessWidget {
     );
   }
 }
+

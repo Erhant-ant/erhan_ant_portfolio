@@ -5,12 +5,19 @@ import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/providers/theme_controller.dart';
 import '../../../core/utils/responsive.dart';
+import 'app_footer.dart';
 
 class AppScaffold extends StatelessWidget {
-  const AppScaffold({super.key, required this.body, this.pageTitleBuilder});
+  const AppScaffold({
+    super.key,
+    required this.body,
+    this.pageTitleBuilder,
+    this.showFooter = true,
+  });
 
   final Widget body;
   final String Function()? pageTitleBuilder;
+  final bool showFooter;
 
   @override
   Widget build(BuildContext context) {
@@ -106,7 +113,14 @@ class AppScaffold extends StatelessWidget {
           drawer: isMobile ? const _MobileMenu() : null,
             body: KeyedSubtree(
               key: ValueKey(language),
-              child: body,
+              child: showFooter
+                  ? Column(
+                      children: [
+                        Expanded(child: body),
+                        const AppFooter(),
+                      ],
+                    )
+                  : body,
             ),
           ),
         );
@@ -124,24 +138,43 @@ class _HeaderLink extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final currentRoute = ModalRoute.of(context)?.settings.name;
-    final isActive = currentRoute == route;
+    final currentPath = GoRouterState.of(context).uri.path;
+    final isActive = currentPath == route;
 
-    return TextButton(
-      onPressed: () {
-        if (!isActive) {
-          context.go(route);
-        }
-      },
-      style: TextButton.styleFrom(
-        foregroundColor: isActive
-            ? theme.colorScheme.primary
-            : theme.colorScheme.onSurface,
-        textStyle: theme.textTheme.bodyMedium?.copyWith(
-          fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 2),
+      child: TextButton(
+        onPressed: () {
+          if (!isActive) {
+            context.go(route);
+          }
+        },
+        style: TextButton.styleFrom(
+          foregroundColor: isActive
+              ? theme.colorScheme.secondary
+              : theme.colorScheme.onSurface,
+          textStyle: theme.textTheme.bodyMedium?.copyWith(
+            fontWeight: isActive ? FontWeight.w700 : FontWeight.w500,
+          ),
+        ),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(label),
+            const SizedBox(height: 4),
+            AnimatedContainer(
+              duration: AppConstants.durationNormal,
+              curve: Curves.easeOut,
+              height: 2,
+              width: isActive ? 20 : 0,
+              decoration: BoxDecoration(
+                color: theme.colorScheme.secondary,
+                borderRadius: BorderRadius.circular(1),
+              ),
+            ),
+          ],
         ),
       ),
-      child: Text(label),
     );
   }
 }
@@ -214,12 +247,12 @@ class _MobileMenuItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final currentRoute = ModalRoute.of(context)?.settings.name;
-    final isActive = currentRoute == route;
+    final currentPath = GoRouterState.of(context).uri.path;
+    final isActive = currentPath == route;
 
     return ListTile(
       selected: isActive,
-      selectedColor: theme.colorScheme.primary,
+      selectedColor: theme.colorScheme.secondary,
       leading: Icon(icon),
       title: Text(
         label,
