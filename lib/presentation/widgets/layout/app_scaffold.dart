@@ -111,16 +111,11 @@ class AppScaffold extends StatelessWidget {
             ],
           ),
           drawer: isMobile ? const _MobileMenu() : null,
-            body: KeyedSubtree(
-              key: ValueKey(language),
-              child: showFooter
-                  ? Column(
-                      children: [
-                        Expanded(child: body),
-                        const AppFooter(),
-                      ],
-                    )
-                  : body,
+            body: SelectionArea(
+              child: KeyedSubtree(
+                key: ValueKey(language),
+                child: body,
+              ),
             ),
           ),
         );
@@ -267,6 +262,39 @@ class _MobileMenuItem extends StatelessWidget {
           context.go(route);
         }
       },
+    );
+  }
+}
+
+class PageScrollWrapper extends StatelessWidget {
+  const PageScrollWrapper({
+    super.key,
+    required this.children,
+    this.padding = EdgeInsets.zero,
+  });
+
+  final List<Widget> children;
+  final EdgeInsetsGeometry padding;
+
+  @override
+  Widget build(BuildContext context) {
+    return CustomScrollView(
+      slivers: [
+        SliverPadding(
+          padding: padding,
+          sliver: SliverList(
+            delegate: SliverChildListDelegate(children),
+          ),
+        ),
+        SliverFillRemaining(
+          hasScrollBody: false,
+          fillOverscroll: true,
+          child: Align(
+            alignment: Alignment.bottomCenter,
+            child: const AppFooter(),
+          ),
+        ),
+      ],
     );
   }
 }

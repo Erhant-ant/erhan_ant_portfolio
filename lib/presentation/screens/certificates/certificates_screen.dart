@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/utils/responsive.dart';
+import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class CertificatesScreen extends StatelessWidget {
@@ -16,7 +17,7 @@ class CertificatesScreen extends StatelessWidget {
     return AppScaffold(
       pageTitleBuilder: () =>
           localized('Learning | Erhan Ant', 'Eğitimler | Erhan Ant'),
-      body: ListView(
+      body: PageScrollWrapper(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
           vertical: AppConstants.space3Xl,
@@ -124,18 +125,18 @@ class CertificatesScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     _LearningCard(
-                      icon: Icons.flutter_dash,
+                      icon: Icons.web_outlined,
                       title: localized(
-                        'Flutter Development',
-                        'Flutter Uygulama Geliştirme',
+                        'Web Development',
+                        'Web Geliştirme',
                       ),
                       platform: localized(
                         'Personal projects',
                         'Kişisel projeler',
                       ),
                       description: localized(
-                        'Building responsive Flutter web applications through hands-on portfolio projects.',
-                        'Portfolyo projeleriyle responsive Flutter web uygulamaları geliştiriyorum.',
+                        'Building responsive web applications through hands-on portfolio projects.',
+                        'Portfolyo projeleriyle responsive web uygulamaları geliştiriyorum.',
                       ),
                       status: localized('Active learning', 'Aktif çalışıyorum'),
                       statusIcon: Icons.autorenew,
@@ -145,6 +146,7 @@ class CertificatesScreen extends StatelessWidget {
               ),
             ),
           ),
+
         ],
       ),
     );

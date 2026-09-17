@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_animate/flutter_animate.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/utils/responsive.dart';
+import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class ContactScreen extends StatelessWidget {
@@ -18,7 +20,7 @@ class ContactScreen extends StatelessWidget {
     return AppScaffold(
       pageTitleBuilder: () =>
           localized('Contact | Erhan Ant', 'İletişim | Erhan Ant'),
-      body: ListView(
+      body: PageScrollWrapper(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
           vertical: AppConstants.space3Xl,
@@ -54,14 +56,14 @@ class ContactScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: AppConstants.space2Xl),
                     const _ContactCard(
-                      icon: Icons.code,
+                      iconWidget: FaIcon(FontAwesomeIcons.github),
                       title: 'GitHub',
                       value: 'github.com/Erhant-ant',
                       url: 'https://github.com/Erhant-ant',
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     const _ContactCard(
-                      icon: Icons.business_center_outlined,
+                      iconWidget: FaIcon(FontAwesomeIcons.linkedinIn),
                       title: 'LinkedIn',
                       value: 'linkedin.com/in/erhan-ant-328380359',
                       url: 'https://www.linkedin.com/in/erhan-ant-328380359',
@@ -71,6 +73,7 @@ class ContactScreen extends StatelessWidget {
               ),
             ),
           ),
+
         ],
       ),
     );
@@ -79,13 +82,13 @@ class ContactScreen extends StatelessWidget {
 
 class _ContactCard extends StatefulWidget {
   const _ContactCard({
-    required this.icon,
+    required this.iconWidget,
     required this.title,
     required this.value,
     required this.url,
   });
 
-  final IconData icon;
+  final Widget iconWidget;
   final String title;
   final String value;
   final String url;
@@ -153,7 +156,10 @@ class _ContactCardState extends State<_ContactCard> {
               color: accent.withValues(alpha: 0.12),
               shape: BoxShape.circle,
             ),
-            child: Icon(widget.icon, size: 28, color: accent),
+            child: IconTheme(
+              data: IconThemeData(color: accent, size: 28),
+              child: widget.iconWidget,
+            ),
           ),
           title: Text(widget.title, style: theme.textTheme.displaySmall),
           subtitle: Padding(

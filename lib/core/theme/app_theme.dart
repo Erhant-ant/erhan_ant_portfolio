@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../constants/app_colors.dart';
 import '../constants/app_constants.dart';
@@ -49,26 +50,26 @@ class AppTheme {
         surfaceTintColor: Colors.transparent,
       ),
       textTheme: TextTheme(
-        displayLarge: TextStyle(
+        displayLarge: GoogleFonts.inter(
           fontSize: 48,
           fontWeight: FontWeight.w700,
           height: 1.15,
           color: textPrimary,
         ),
-        displayMedium: TextStyle(
+        displayMedium: GoogleFonts.inter(
           fontSize: 32,
           fontWeight: FontWeight.w700,
           height: 1.2,
           color: textPrimary,
         ),
-        displaySmall: TextStyle(
+        displaySmall: GoogleFonts.inter(
           fontSize: 22,
           fontWeight: FontWeight.w600,
           height: 1.3,
           color: textPrimary,
         ),
-        bodyLarge: TextStyle(fontSize: 16, height: 1.6, color: textPrimary),
-        bodyMedium: TextStyle(fontSize: 14, height: 1.5, color: textSecondary),
+        bodyLarge: GoogleFonts.inter(fontSize: 16, height: 1.6, color: textPrimary),
+        bodyMedium: GoogleFonts.inter(fontSize: 14, height: 1.5, color: textSecondary),
       ),
       cardTheme: CardThemeData(
         elevation: 0,

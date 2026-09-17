@@ -175,8 +175,8 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
   List<_FocusItem> _focusItems(ThemeData theme) {
     return [
       _FocusItem(
-        icon: Icons.flutter_dash,
-        title: 'Flutter',
+        icon: Icons.code_outlined,
+        title: localized('App Dev', 'Uygulama Gel.'),
         description: localized(
           'Building responsive interfaces for web and mobile.',
           'Web ve mobil için responsive arayüzler geliştiriyorum.',
@@ -200,6 +200,15 @@ class _CurrentFocusSectionState extends State<CurrentFocusSection>
           'Kullanılabilir yapay zeka araçlarını ve pratik uygulama fikirlerini keşfediyorum.',
         ),
         color: theme.colorScheme.tertiary,
+      ),
+      _FocusItem(
+        icon: Icons.auto_mode_outlined,
+        title: localized('Automation', 'Otomasyon'),
+        description: localized(
+          'Automating workflows and scripting to improve efficiency.',
+          'Verimliliği artırmak için iş akışlarını otomatikleştiriyorum ve komut dosyaları (script) yazıyorum.',
+        ),
+        color: theme.colorScheme.primary.withAlpha(200),
       ),
     ];
   }

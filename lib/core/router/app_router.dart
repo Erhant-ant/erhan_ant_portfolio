@@ -6,6 +6,7 @@ import '../../presentation/screens/certificates/certificates_screen.dart';
 import '../../presentation/screens/contact/contact_screen.dart';
 import '../../presentation/screens/cv/cv_screen.dart';
 import '../../presentation/screens/home/home_screen.dart';
+import '../../presentation/screens/not_found/not_found_screen.dart';
 import '../../presentation/screens/projects/projects_screen.dart';
 
 class AppRoutes {
@@ -68,7 +69,7 @@ class AppRouter {
         ),
       ),
     ],
-    errorBuilder: (context, state) => const HomeScreen(),
+    errorBuilder: (context, state) => const NotFoundScreen(),
   );
 
   static CustomTransitionPage<void> _fadeTransitionPage({

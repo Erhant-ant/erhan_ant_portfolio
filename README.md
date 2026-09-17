@@ -1,6 +1,6 @@
 # Erhan Ant Portfolio
 
-A bilingual personal portfolio built with Flutter for the web. It presents my background in IT and software, current learning, selected projects, and professional profiles.
+A bilingual personal portfolio built for the web. It presents my background in IT and software, current learning, selected projects, and professional profiles.
 
 ## Live Site
 
@@ -11,17 +11,21 @@ A bilingual personal portfolio built with Flutter for the web. It presents my ba
 - English and Turkish interface with saved language preference
 - Light and dark themes with saved preference
 - Responsive layout for mobile and desktop screens
-- Project case study for the SupportDesk IT ticket tracker
-- CV download and professional profile links
+- Categorized GitHub project gallery with animations
+- Case study showcase for key projects
+- CV summary and PDF download
+- Professional profile links (GitHub, LinkedIn)
 - GitHub Pages deployment through GitHub Actions
 
 ## Tech Stack
 
-- Flutter and Dart
-- Material 3
+- Dart & Material 3
+- `flutter_animate` for micro-animations
+- `go_router` for URL-based navigation
+- `google_fonts` for Inter typography
 - `shared_preferences` for local settings
-- `url_launcher` for external profile and project links
-- GitHub Actions and GitHub Pages
+- `url_launcher` for external links
+- GitHub Actions & GitHub Pages
 
 ## Run Locally
 
@@ -40,7 +44,3 @@ flutter test
 ## Deployment
 
 Every push to `main` builds the web app and deploys it to GitHub Pages. The workflow is defined in [`.github/workflows/main.yml`](.github/workflows/main.yml).
-
-## Related Project
-
-[SupportDesk IT Ticket Tracker](https://github.com/Erhant-ant/it_support_ticket_tracker) is a bilingual Flutter application for recording, prioritizing, and tracking IT support requests.

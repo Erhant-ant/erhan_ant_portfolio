@@ -4,6 +4,7 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/utils/responsive.dart';
+import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -17,7 +18,7 @@ class AboutScreen extends StatelessWidget {
     return AppScaffold(
       pageTitleBuilder: () =>
           localized('About | Erhan Ant', 'Hakkımda | Erhan Ant'),
-      body: ListView(
+      body: PageScrollWrapper(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
           vertical: AppConstants.space3Xl,
@@ -47,26 +48,16 @@ class AboutScreen extends StatelessWidget {
                         child: Stack(
                           clipBehavior: Clip.none,
                           children: [
-                            // Decorative accent border
-                            Positioned.fill(
-                              child: Transform.translate(
-                                offset: const Offset(8, 8),
-                                child: DecoratedBox(
-                                  decoration: BoxDecoration(
-                                    shape: BoxShape.circle,
-                                    border: Border.all(
-                                      color: accent.withValues(alpha: 0.6),
-                                      width: 2,
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
+
                             // Photo
                             Positioned.fill(
                               child: Container(
                                 decoration: BoxDecoration(
                                   shape: BoxShape.circle,
+                                  border: Border.all(
+                                    color: accent.withValues(alpha: 0.6),
+                                    width: 2,
+                                  ),
                                   boxShadow: [
                                     BoxShadow(
                                       color: accent.withValues(alpha: 0.2),
@@ -205,14 +196,19 @@ class AboutScreen extends StatelessWidget {
                           color: accent,
                         ),
                         _FocusPill(
-                          label: 'Flutter',
-                          icon: Icons.flutter_dash,
+                          label: 'Web Dev',
+                          icon: Icons.web_outlined,
                           color: theme.colorScheme.primary,
                         ),
                         _FocusPill(
                           label: localized('AI Tools', 'Yapay Zeka Araçları'),
                           icon: Icons.psychology_outlined,
                           color: theme.colorScheme.tertiary,
+                        ),
+                        _FocusPill(
+                          label: localized('Automation', 'Otomasyon'),
+                          icon: Icons.auto_mode_outlined,
+                          color: theme.colorScheme.primary.withAlpha(200),
                         ),
                       ],
                     ),
@@ -221,6 +217,7 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ),
+
         ],
       ),
     );

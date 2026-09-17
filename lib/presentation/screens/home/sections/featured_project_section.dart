@@ -194,7 +194,7 @@ class _ProjectTypeLabel extends StatelessWidget {
         borderRadius: BorderRadius.circular(AppConstants.radiusSm),
       ),
       child: Text(
-        'FLUTTER WEB APP',
+        'WEB APP',
         style: Theme.of(context).textTheme.labelSmall?.copyWith(
           color: Colors.white,
           fontWeight: FontWeight.w800,

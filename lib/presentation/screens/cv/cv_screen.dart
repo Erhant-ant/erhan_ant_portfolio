@@ -7,6 +7,7 @@ import '../../../core/localization/app_language.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/cv_downloader.dart';
 import '../../../core/utils/responsive.dart';
+import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class CvScreen extends StatelessWidget {
@@ -18,7 +19,7 @@ class CvScreen extends StatelessWidget {
 
     return AppScaffold(
       pageTitleBuilder: () => 'CV | Erhan Ant',
-      body: ListView(
+      body: PageScrollWrapper(
         padding: EdgeInsets.symmetric(
           horizontal: Responsive.pagePadding(context),
           vertical: AppConstants.space3Xl,
@@ -115,6 +116,11 @@ class CvScreen extends StatelessWidget {
                           icon: Icons.business_center_outlined,
                           color: theme.colorScheme.secondary,
                         ),
+                        _SkillPill(
+                          label: localized('Automation', 'Otomasyon'),
+                          icon: Icons.auto_mode_outlined,
+                          color: theme.colorScheme.primary.withAlpha(200),
+                        ),
                       ],
                     ),
 
@@ -172,8 +178,8 @@ class CvScreen extends StatelessWidget {
                           color: theme.colorScheme.primary,
                         ),
                         _SkillPill(
-                          label: 'Flutter',
-                          icon: Icons.flutter_dash,
+                          label: 'Web Dev',
+                          icon: Icons.web_outlined,
                           color: theme.colorScheme.secondary,
                         ),
                         _SkillPill(
@@ -262,6 +268,7 @@ class CvScreen extends StatelessWidget {
               ),
             ),
           ),
+
         ],
       ),
     );

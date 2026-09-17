@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_web_plugins/url_strategy.dart';
 
 import 'core/constants/app_constants.dart';
@@ -33,10 +34,22 @@ class PortfolioApp extends StatelessWidget {
               title: AppConstants.appName,
               debugShowCheckedModeBanner: false,
               locale: Locale(language == AppLanguage.english ? 'en' : 'tr'),
+              localizationsDelegates: const [
+                GlobalMaterialLocalizations.delegate,
+                GlobalWidgetsLocalizations.delegate,
+                GlobalCupertinoLocalizations.delegate,
+              ],
+              supportedLocales: const [
+                Locale('en'),
+                Locale('tr'),
+              ],
               theme: AppTheme.lightTheme,
               darkTheme: AppTheme.darkTheme,
               themeMode: themeMode,
               routerConfig: AppRouter.router,
+              builder: (context, child) {
+                return child ?? const SizedBox.shrink();
+              },
             );
           },
         );

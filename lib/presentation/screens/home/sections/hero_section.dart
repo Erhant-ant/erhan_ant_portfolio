@@ -166,7 +166,7 @@ class _HeroContent extends StatelessWidget {
           spacing: AppConstants.spaceSm,
           runSpacing: AppConstants.spaceSm,
           children: [
-            _SkillPill(label: 'Flutter', color: accent),
+            _SkillPill(label: 'Software Dev', color: accent),
             _SkillPill(label: 'IT Support', color: accent),
             _SkillPill(label: 'SQL', color: accent),
           ],
@@ -275,21 +275,16 @@ class _ProfilePanel extends StatelessWidget {
       child: Stack(
         clipBehavior: Clip.none,
         children: [
+
           Positioned.fill(
-            child: Transform.translate(
-              offset: const Offset(12, 12),
-              child: DecoratedBox(
-                decoration: BoxDecoration(
-                  border: Border.all(color: accent.withValues(alpha: 0.7)),
-                  borderRadius: BorderRadius.circular(22),
-                ),
+            child: Container(
+              decoration: BoxDecoration(
+                border: Border.all(color: accent.withValues(alpha: 0.7), width: 2),
+                borderRadius: BorderRadius.circular(22),
               ),
-            ),
-          ),
-          Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(22),
-              child: Image.asset(
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(20),
+                child: Image.asset(
                 'assets/images/profile.jpeg',
                 fit: BoxFit.cover,
                 alignment: Alignment.topCenter,
@@ -306,6 +301,7 @@ class _ProfilePanel extends StatelessWidget {
                 },
               ),
             ),
+          ),
           ),
           Positioned(
             bottom: -18,

@@ -11,9 +11,22 @@ class ContactPreviewSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
+    final accent = theme.colorScheme.secondary;
 
     return Container(
       width: double.infinity,
+      decoration: BoxDecoration(
+        gradient: LinearGradient(
+          begin: Alignment.topLeft,
+          end: Alignment.bottomRight,
+          colors: [
+            accent.withValues(alpha: isDark ? 0.08 : 0.05),
+            theme.colorScheme.surface,
+            accent.withValues(alpha: isDark ? 0.06 : 0.03),
+          ],
+        ),
+      ),
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.spaceLg,
         vertical: AppConstants.space3Xl,
@@ -25,6 +38,16 @@ class ContactPreviewSection extends StatelessWidget {
           ),
           child: Column(
             children: [
+              Container(
+                width: 48,
+                height: 48,
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.12),
+                  shape: BoxShape.circle,
+                ),
+                child: Icon(Icons.forum_outlined, color: accent, size: 22),
+              ),
+              const SizedBox(height: AppConstants.spaceLg),
               Text(
                 localized('Let\'s Connect', 'Bağlantı Kuralım'),
                 style: theme.textTheme.displayMedium,
