@@ -48,6 +48,7 @@ class PortfolioApp extends StatelessWidget {
               themeMode: themeMode,
               routerConfig: AppRouter.router,
               builder: (context, child) {
+                // HATAYA SEBEP OLAN KISIM DÜZELTİLDİ
                 return child ?? const SizedBox.shrink();
               },
             );
@@ -57,4 +58,3 @@ class PortfolioApp extends StatelessWidget {
     );
   }
 }
-

@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeController extends ValueNotifier<ThemeMode> {
-  ThemeController() : super(ThemeMode.system);
+  // Başlangıç temasını sistem yerine doğrudan modern konseptimiz olan Dark (Koyu) yapıyoruz.
+  ThemeController() : super(ThemeMode.dark);
 
   static const _themeKey = 'theme_mode';
 
@@ -11,16 +12,18 @@ class ThemeController extends ValueNotifier<ThemeMode> {
   Future<void> load() async {
     final savedTheme = await _preferences.getString(_themeKey);
 
-    if (savedTheme == ThemeMode.dark.name) {
-      value = ThemeMode.dark;
-    } else if (savedTheme == ThemeMode.light.name) {
+    // Eğer kullanıcı daha önce açık temayı (Light) seçip kaydettiyse onu yüklüyoruz.
+    if (savedTheme == ThemeMode.light.name) {
       value = ThemeMode.light;
     } else {
-      value = ThemeMode.system;
+      // Eğer daha önce kaydedilmiş bir tercih yoksa (ilk giriş) veya Dark seçilmişse,
+      // her zaman Koyu (Dark) temayı varsayılan olarak veriyoruz.
+      value = ThemeMode.dark;
     }
   }
 
   void toggle() {
+    // Sadece Dark ve Light arasında kusursuz ikili (binary) geçiş.
     final nextTheme = value == ThemeMode.dark
         ? ThemeMode.light
         : ThemeMode.dark;
@@ -30,4 +33,5 @@ class ThemeController extends ValueNotifier<ThemeMode> {
   }
 }
 
+// İŞTE EKSİK OLAN SATIR! (Diğer dosyaların bu sınıfa ulaşmasını sağlayan obje)
 final themeController = ThemeController();

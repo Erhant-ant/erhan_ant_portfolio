@@ -3,19 +3,21 @@ import 'package:flutter/material.dart';
 class AppColors {
   AppColors._();
 
-  static const lightBackground = Color(0xFFF7F8FA);
+  // Modern Light Theme (Aydınlık, ferah ve profesyonel)
+  static const lightBackground = Color(0xFFF8FAFC); // Çok uçuk gri-mavi
   static const lightSurface = Color(0xFFFFFFFF);
-  static const lightTextPrimary = Color(0xFF1B2026);
-  static const lightTextSecondary = Color(0xFF66707A);
-  static const lightPrimary = Color(0xFF1E4B5A);
-  static const lightAccent = Color(0xFFD9643D);
-  static const lightBorder = Color(0xFFE2E6EA);
+  static const lightTextPrimary = Color(0xFF0F172A); // Koyu lacivert/siyah
+  static const lightTextSecondary = Color(0xFF64748B);
+  static const lightPrimary = Color(0xFF2563EB); // Royal Blue (Ana renk)
+  static const lightAccent = Color(0xFF7C3AED); // Canlı Mor (Işık rengi)
+  static const lightBorder = Color(0xFFE2E8F0);
 
-  static const darkBackground = Color(0xFF15191D);
-  static const darkSurface = Color(0xFF20262C);
-  static const darkTextPrimary = Color(0xFFF7F8FA);
-  static const darkTextSecondary = Color(0xFFAAB3BC);
-  static const darkPrimary = Color(0xFF79BDCB);
-  static const darkAccent = Color(0xFFFF8B61);
-  static const darkBorder = Color(0xFF353D45);
+  // Modern Dark Theme (Oyun ve Full Stack yazılımcı ruhu - Deep Space)
+  static const darkBackground = Color(0xFF0B0F19); // Çok derin gece mavisi
+  static const darkSurface = Color(0xFF111827); // Koyu yüzey
+  static const darkTextPrimary = Color(0xFFF8FAFC);
+  static const darkTextSecondary = Color(0xFF94A3B8);
+  static const darkPrimary = Color(0xFF3B82F6); // Parlak Mavi
+  static const darkAccent = Color(0xFF8B5CF6); // Siber/Neon Mor
+  static const darkBorder = Color(0xFF1E293B);
 }

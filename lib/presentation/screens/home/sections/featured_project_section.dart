@@ -31,7 +31,8 @@ class FeaturedProjectSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final isMobile = Responsive.isMobile(context);
     final theme = Theme.of(context);
-    final accent = theme.colorScheme.secondary;
+    final isDark = theme.brightness == Brightness.dark;
+    final primary = theme.colorScheme.primary;
 
     return Padding(
       padding: EdgeInsets.symmetric(
@@ -46,20 +47,20 @@ class FeaturedProjectSection extends StatelessWidget {
           child: Container(
             clipBehavior: Clip.antiAlias,
             decoration: BoxDecoration(
-              gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  theme.colorScheme.surface,
-                  accent.withValues(alpha: 0.10),
-                ],
-              ),
-              borderRadius: BorderRadius.circular(28),
-              border: Border.all(color: theme.colorScheme.outline),
+              color: isDark ? const Color(0xFF131B2A) : theme.colorScheme.surface,
+              borderRadius: BorderRadius.circular(32),
+              border: Border.all(color: primary.withValues(alpha: 0.2), width: 1.5),
+              boxShadow: [
+                BoxShadow(
+                  color: primary.withValues(alpha: 0.1),
+                  blurRadius: 40,
+                  spreadRadius: 5,
+                )
+              ]
             ),
             child: Padding(
               padding: EdgeInsets.all(
-                isMobile ? AppConstants.spaceLg : AppConstants.space2Xl,
+                isMobile ? AppConstants.spaceLg : AppConstants.space3Xl,
               ),
               child: isMobile
                   ? Column(
@@ -74,7 +75,7 @@ class FeaturedProjectSection extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         const Expanded(flex: 11, child: _ProjectVisual()),
-                        const SizedBox(width: AppConstants.space3Xl),
+                        const SizedBox(width: 48),
                         Expanded(
                           flex: 10,
                           child: _FeaturedProjectContent(
@@ -97,79 +98,90 @@ class _ProjectVisual extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final accent = theme.colorScheme.secondary;
+    final primary = theme.colorScheme.primary;
 
     return AspectRatio(
       aspectRatio: 16 / 11,
       child: Stack(
         clipBehavior: Clip.none,
         children: [
+          // Background Glow Frame
           Positioned.fill(
             child: Transform.translate(
-              offset: const Offset(10, 10),
+              offset: const Offset(16, 16),
               child: DecoratedBox(
                 decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  border: Border.all(color: accent.withValues(alpha: 0.65)),
+                  borderRadius: BorderRadius.circular(24),
+                  border: Border.all(color: primary.withValues(alpha: 0.4), width: 2),
+                  boxShadow: [
+                    BoxShadow(color: primary.withValues(alpha: 0.1), blurRadius: 20)
+                  ]
                 ),
               ),
             ),
           ),
+          // Main Image
           Positioned.fill(
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(20),
-              child: Stack(
-                fit: StackFit.expand,
-                children: [
-                  Image.asset(
-                    'assets/images/supportdesk_dashboard.png',
-                    fit: BoxFit.cover,
-                    alignment: Alignment.topCenter,
-                    semanticLabel: 'SupportDesk dashboard preview',
-                    errorBuilder: (context, error, stackTrace) {
-                      return Container(
-                        color: theme.colorScheme.surface,
-                        alignment: Alignment.center,
-                        child: Icon(
-                          Icons.support_agent_outlined,
-                          size: 56,
-                          color: accent,
+            child: Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(24),
+                border: Border.all(color: theme.colorScheme.outline),
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(22),
+                child: Stack(
+                  fit: StackFit.expand,
+                  children: [
+                    Image.asset(
+                      'assets/images/supportdesk_dashboard.png',
+                      fit: BoxFit.cover,
+                      alignment: Alignment.topCenter,
+                      semanticLabel: 'SupportDesk dashboard preview',
+                      errorBuilder: (context, error, stackTrace) {
+                        return Container(
+                          color: theme.colorScheme.surface,
+                          alignment: Alignment.center,
+                          child: Icon(
+                            Icons.dashboard_customize_rounded,
+                            size: 64,
+                            color: primary,
+                          ),
+                        );
+                      },
+                    ),
+                    DecoratedBox(
+                      decoration: BoxDecoration(
+                        gradient: LinearGradient(
+                          begin: Alignment.topCenter,
+                          end: Alignment.bottomCenter,
+                          colors: [Colors.transparent, Colors.black.withValues(alpha: 0.7)],
                         ),
-                      );
-                    },
-                  ),
-                  DecoratedBox(
-                    decoration: BoxDecoration(
-                      gradient: LinearGradient(
-                        begin: Alignment.topCenter,
-                        end: Alignment.bottomCenter,
-                        colors: [Colors.transparent, Colors.black.withValues(alpha: 0.56)],
                       ),
                     ),
-                  ),
-                  Positioned(
-                    left: AppConstants.spaceLg,
-                    right: AppConstants.spaceLg,
-                    bottom: AppConstants.spaceLg,
-                    child: Text(
-                      localized(
-                        'A practical workspace for IT support teams.',
-                        'IT destek ekipleri için pratik bir çalışma alanı.',
-                      ),
-                      style: theme.textTheme.titleMedium?.copyWith(
-                        color: Colors.white,
-                        fontWeight: FontWeight.w700,
+                    Positioned(
+                      left: AppConstants.spaceLg,
+                      right: AppConstants.spaceLg,
+                      bottom: AppConstants.spaceLg,
+                      child: Text(
+                        localized(
+                          'A scalable workspace for support teams.',
+                          'Destek ekipleri için ölçeklenebilir bir çalışma alanı.',
+                        ),
+                        style: theme.textTheme.titleLarge?.copyWith(
+                          color: Colors.white,
+                          fontWeight: FontWeight.w800,
+                        ),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),
           Positioned(
-            top: AppConstants.spaceMd,
-            left: AppConstants.spaceMd,
-            child: _ProjectTypeLabel(color: accent),
+            top: AppConstants.spaceLg,
+            left: AppConstants.spaceLg,
+            child: _ProjectTypeLabel(color: primary),
           ),
         ],
       ),
@@ -186,20 +198,30 @@ class _ProjectTypeLabel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppConstants.spaceSm,
-        vertical: AppConstants.spaceXs,
+        horizontal: 14,
+        vertical: 8,
       ),
       decoration: BoxDecoration(
         color: color,
         borderRadius: BorderRadius.circular(AppConstants.radiusSm),
+        boxShadow: [
+          BoxShadow(color: color.withValues(alpha: 0.5), blurRadius: 10)
+        ]
       ),
-      child: Text(
-        'WEB APP',
-        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-          color: Colors.white,
-          fontWeight: FontWeight.w800,
-          letterSpacing: 0.9,
-        ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          const Icon(Icons.star_rounded, size: 14, color: Colors.white),
+          const SizedBox(width: 6),
+          Text(
+            'FULL-STACK APP',
+            style: Theme.of(context).textTheme.labelSmall?.copyWith(
+              color: Colors.white,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 1.0,
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -213,7 +235,7 @@ class _FeaturedProjectContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final accent = theme.colorScheme.secondary;
+    final primary = theme.colorScheme.primary;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -221,9 +243,9 @@ class _FeaturedProjectContent extends StatelessWidget {
         Text(
           localized('Featured Build', 'Öne Çıkan Uygulama').toUpperCase(),
           style: theme.textTheme.bodyMedium?.copyWith(
-            color: accent,
-            fontWeight: FontWeight.w800,
-            letterSpacing: 1.4,
+            color: primary,
+            fontWeight: FontWeight.w900,
+            letterSpacing: 1.5,
           ),
         ),
         const SizedBox(height: AppConstants.spaceSm),
@@ -231,19 +253,19 @@ class _FeaturedProjectContent extends StatelessWidget {
         const SizedBox(height: AppConstants.spaceMd),
         Text(
           localized(
-            'A bilingual IT support ticket tracker that turns scattered requests into a clear, manageable workflow.',
-            'Dağınık IT destek taleplerini net ve yönetilebilir bir iş akışına dönüştüren iki dilli ticket takip uygulaması.',
+            'A bilingual IT support ticket tracker that turns scattered requests into a clear, manageable workflow. Built to demonstrate solid architecture and UI principles.',
+            'Dağınık IT destek taleplerini net ve yönetilebilir bir iş akışına dönüştüren iki dilli ticket takip uygulaması. Sağlam mimari ve UI prensiplerini sergilemek için geliştirildi.',
           ),
-          style: theme.textTheme.bodyLarge,
+          style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
         ),
         const SizedBox(height: AppConstants.spaceXl),
         Wrap(
           spacing: AppConstants.spaceSm,
           runSpacing: AppConstants.spaceSm,
           children: [
-            _Capability(label: localized('Bilingual', 'İki dilli')),
-            _Capability(label: localized('Workflow board', 'İş akışı panosu')),
-            _Capability(label: localized('SLA tracking', 'SLA takibi')),
+            _Capability(label: localized('Bilingual Support', 'İki dilli destek'), icon: Icons.language_rounded),
+            _Capability(label: localized('Workflow Board', 'İş akışı panosu'), icon: Icons.view_kanban_rounded),
+            _Capability(label: localized('SLA Tracking', 'SLA takibi'), icon: Icons.timer_rounded),
           ],
         ),
         const SizedBox(height: AppConstants.spaceXl),
@@ -255,13 +277,13 @@ class _FeaturedProjectContent extends StatelessWidget {
               onPressed: () {
                 context.go(AppRoutes.projects);
               },
-              icon: const Icon(Icons.arrow_outward),
-              label: Text(localized('Read the Case Study', 'Vaka Çalışmasını Oku')),
+              icon: const Icon(Icons.rocket_launch_rounded),
+              label: Text(localized('See All Projects', 'Tüm Projeleri Gör')),
             ),
             OutlinedButton.icon(
               onPressed: () => onOpenRepository(context),
-              icon: const Icon(Icons.code_outlined),
-              label: Text(localized('View Source', 'Kaynağı Görüntüle')),
+              icon: const Icon(Icons.code_rounded),
+              label: Text(localized('View Source', 'Kaynağı İncele')),
             ),
           ],
         ),
@@ -271,27 +293,39 @@ class _FeaturedProjectContent extends StatelessWidget {
 }
 
 class _Capability extends StatelessWidget {
-  const _Capability({required this.label});
+  const _Capability({required this.label, required this.icon});
 
   final String label;
+  final IconData icon;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
 
     return Container(
       padding: const EdgeInsets.symmetric(
-        horizontal: AppConstants.spaceMd,
-        vertical: AppConstants.spaceSm,
+        horizontal: 14,
+        vertical: 8,
       ),
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface.withValues(alpha: 0.7),
+        color: primary.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(AppConstants.radiusFull),
-        border: Border.all(color: theme.colorScheme.outline),
+        border: Border.all(color: primary.withValues(alpha: 0.2)),
       ),
-      child: Text(
-        label,
-        style: theme.textTheme.bodyMedium?.copyWith(fontWeight: FontWeight.w700),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 16, color: primary),
+          const SizedBox(width: 6),
+          Text(
+            label,
+            style: theme.textTheme.bodyMedium?.copyWith(
+              fontWeight: FontWeight.w700,
+              color: theme.colorScheme.onSurface.withValues(alpha: 0.9)
+            ),
+          ),
+        ],
       ),
     );
   }

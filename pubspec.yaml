@@ -23,6 +23,7 @@ dependencies:
   google_fonts: ^6.2.1
   font_awesome_flutter: ^11.0.0
   web: ^0.5.1
+  visibility_detector: ^0.4.0+2
 
 dev_dependencies:
   flutter_test:
@@ -30,9 +31,11 @@ dev_dependencies:
   shared_preferences_platform_interface: ^2.4.2
   flutter_lints: ^6.0.0
 
+# ... (Üst kısımlar aynı)
 flutter:
   uses-material-design: true
   assets:
-    - assets/images/profile.jpeg
+    # JPEG yerine WebP kullanarak LCP skorunu artırdık
+    - assets/images/profile.webp 
     - assets/images/supportdesk_dashboard.png
     - assets/documents/Erhan_Ant_CV.pdf

@@ -27,7 +27,8 @@ jobs:
         run: flutter pub get
 
       - name: Build web
-        run: flutter build web --release --base-href "/erhan_ant_portfolio/"
+        # --wasm bayrağı ile tarayıcıda C++ gücünde çalışmasını sağlıyoruz!
+        run: flutter build web --wasm --release --base-href "/erhan_ant_portfolio/"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

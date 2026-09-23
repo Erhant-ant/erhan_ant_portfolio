@@ -1,0 +1,18 @@
+<svg width="512" height="512" viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Mavi'den Neon Mor'a Marka Renk Geçişimiz -->
+    <linearGradient id="eantGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" />
+      <stop offset="100%" stop-color="#8B5CF6" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Koyu Gece Mavisi Arka Plan (Hafif yuvarlatılmış kare - Squircle) -->
+  <rect width="512" height="512" rx="128" fill="#0B0F19" />
+  
+  <!-- Üst Katman (Oyun & Mimari Temsili) -->
+  <polygon points="256,140 400,220 256,300 112,220" fill="url(#eantGradient)" />
+  
+  <!-- Alt Katman (Altyapı ve IT Temsili) -->
+  <polygon points="112,280 256,360 400,280 400,330 256,410 112,330" fill="url(#eantGradient)" opacity="0.6" />
+</svg>

@@ -7,79 +7,52 @@
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Erhan Ant's bilingual portfolio featuring IT support, software projects, technical learning, and professional profiles.">
+
+  <meta name="description"
+    content="EANT Studio - Erhan Ant's bilingual portfolio featuring Game Development, IT support, software projects, and professional profiles.">
   <meta name="author" content="Erhan Ant">
   <meta name="robots" content="index, follow">
-  <meta name="theme-color" content="#D9643D">
+  <meta name="theme-color" content="#0B0F19">
 
   <link rel="canonical" href="https://erhant-ant.github.io/erhan_ant_portfolio/">
 
   <meta property="og:type" content="website">
-  <meta property="og:site_name" content="Erhan Ant Portfolio">
-  <meta property="og:title" content="Erhan Ant | Software & IT Portfolio">
-  <meta property="og:description" content="Software projects, IT support experience, technical learning, and professional profiles.">
+  <meta property="og:site_name" content="EANT Studio">
+  <meta property="og:title" content="EANT Studio | Software & Game Developer">
+  <meta property="og:description"
+    content="Software projects, Game Development, IT support experience, technical learning, and professional profiles.">
   <meta property="og:url" content="https://erhant-ant.github.io/erhan_ant_portfolio/">
-  <meta property="og:image" content="https://erhant-ant.github.io/erhan_ant_portfolio/assets/assets/images/profile.jpeg">
+  <meta property="og:image"
+    content="https://erhant-ant.github.io/erhan_ant_portfolio/assets/assets/images/profile.jpeg">
 
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="Erhan Ant | Software & IT Portfolio">
-  <meta name="twitter:description" content="Software projects, IT support experience, technical learning, and professional profiles.">
-  <meta name="twitter:image" content="https://erhant-ant.github.io/erhan_ant_portfolio/assets/assets/images/profile.jpeg">
+  <meta name="twitter:title" content="EANT Studio | Software & Game Developer">
+  <meta name="twitter:description"
+    content="Software projects, Game Development, IT support experience, and professional profiles.">
+  <meta name="twitter:image"
+    content="https://erhant-ant.github.io/erhan_ant_portfolio/assets/assets/images/profile.jpeg">
 
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black">
-  <meta name="apple-mobile-web-app-title" content="Erhan Ant">
-  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <meta name="apple-mobile-web-app-title" content="EANT Studio">
 
+  <link rel="apple-touch-icon" href="icons/Icon-192.png">
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="icon" type="image/png" href="favicon.png">
 
-  <title>Erhan Ant | Software & IT Portfolio</title>
+  <title>EANT Studio | Software & Game Developer</title>
   <link rel="manifest" href="manifest.json">
 
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "Person",
-      "name": "Erhan Ant",
-      "url": "https://erhant-ant.github.io/erhan_ant_portfolio/",
-      "image": "https://erhant-ant.github.io/erhan_ant_portfolio/assets/assets/images/profile.jpeg",
-      "jobTitle": "IT Support and Software Developer",
-      "sameAs": [
-        "https://github.com/Erhant-ant",
-        "https://www.linkedin.com/in/erhan-ant-328380359"
-      ],
-      "knowsAbout": [
-        "IT Support",
-        "SQL",
-        "Networking",
-        "Software Development",
-        "Web Development"
-      ],
-      "alumniOf": [
-        {
-          "@type": "CollegeOrUniversity",
-          "name": "Passaic County Community College"
-        },
-        {
-          "@type": "CollegeOrUniversity",
-          "name": "Izmir Katip Celebi University"
-        }
-      ],
-      "hasCredential": {
-        "@type": "EducationalOccupationalCredential",
-        "credentialCategory": "Professional Certificate",
-        "name": "Google IT Support Professional Certificate"
-      }
-    }
-  </script>
   <style>
-    body, html {
+    body,
+    html {
       margin: 0;
       padding: 0;
-      background-color: #15191D;
+      background-color: #0B0F19;
       width: 100%;
       height: 100%;
     }
+
     .loading-container {
       position: fixed;
       top: 0;
@@ -90,34 +63,49 @@
       flex-direction: column;
       justify-content: center;
       align-items: center;
-      background-color: #15191D;
+      background-color: #0B0F19;
       z-index: 9999;
       transition: opacity 0.5s ease-out;
     }
+
     .spinner {
-      width: 48px;
-      height: 48px;
-      border: 4px solid rgba(217, 100, 61, 0.2);
+      width: 56px;
+      height: 56px;
+      border: 4px solid rgba(59, 130, 246, 0.15);
       border-radius: 50%;
-      border-top-color: #D9643D;
+      border-top-color: #3B82F6;
       animation: spin 1s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+      box-shadow: 0 0 20px rgba(59, 130, 246, 0.4);
     }
+
     .loading-text {
       margin-top: 24px;
-      color: #D9643D;
+      color: #3B82F6;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-      font-weight: 500;
-      letter-spacing: 2px;
+      font-weight: 700;
+      letter-spacing: 3px;
       text-transform: uppercase;
       font-size: 14px;
       animation: pulse 2s infinite ease-in-out;
     }
+
     @keyframes spin {
-      to { transform: rotate(360deg); }
+      to {
+        transform: rotate(360deg);
+      }
     }
+
     @keyframes pulse {
-      0%, 100% { opacity: 0.5; }
-      50% { opacity: 1; }
+
+      0%,
+      100% {
+        opacity: 0.4;
+      }
+
+      50% {
+        opacity: 1;
+        text-shadow: 0 0 10px rgba(59, 130, 246, 0.5);
+      }
     }
   </style>
 </head>
@@ -125,12 +113,12 @@
 <body>
   <div id="loading" class="loading-container">
     <div class="spinner"></div>
-    <div class="loading-text">Yükleniyor / Loading</div>
+    <div class="loading-text">SYSTEM BOOTING</div>
   </div>
 
   <script>
-    window.addEventListener('load', function() {
-      var observer = new MutationObserver(function(mutations) {
+    window.addEventListener('load', function () {
+      var observer = new MutationObserver(function (mutations) {
         for (var i = 0; i < mutations.length; i++) {
           if (mutations[i].addedNodes.length > 0) {
             var node = mutations[i].addedNodes[0];
@@ -138,7 +126,7 @@
               var loader = document.getElementById('loading');
               if (loader) {
                 loader.style.opacity = '0';
-                setTimeout(() => loader.remove(), 500); // Wait for transition
+                setTimeout(() => loader.remove(), 500);
               }
               observer.disconnect();
             }

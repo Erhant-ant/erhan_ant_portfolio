@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -7,8 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/utils/responsive.dart';
-import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
+import '../../widgets/layout/scroll_reveal.dart';
 
 // --- Data Model ---
 
@@ -74,41 +73,33 @@ class ProjectsScreen extends StatelessWidget {
   List<_ProjectCategory> _categories(ThemeData theme) {
     return [
       _ProjectCategory(
-        titleEn: 'Portfolios',
-        titleTr: 'Portfolyolar',
-        icon: Icons.web_outlined,
-        color: theme.colorScheme.secondary,
+        titleEn: 'Games',
+        titleTr: 'Oyunlar',
+        icon: Icons.sports_esports_rounded,
+        color: const Color(0xFF10B981), // Emerald Green
         projects: [
           _Project(
-            name: 'Portfolios',
-            descriptionEn: 'My portfolio websites and projects.',
-            descriptionTr: 'Portfolyo web sitelerim ve projelerim.',
-            language: 'Dart',
+            name: 'Games',
+            descriptionEn: 'Major game projects and prototypes I am developing.',
+            descriptionTr: 'Geliştirmekte olduğum büyük oyun projeleri ve prototipler.',
+            language: 'C# / Unity / Dart',
             isPublic: true,
-            url: 'https://github.com/Erhant-ant/Portfolios',
-          ),
-          _Project(
-            name: 'erhan_ant_portfolio',
-            descriptionEn: 'Personal portfolio v1 website.',
-            descriptionTr: 'Kişisel portfolyo v1 web sitesi.',
-            language: 'Dart',
-            isPublic: true,
-            url: 'https://github.com/Erhant-ant/erhan_ant_portfolio',
+            url: 'https://github.com/Erhant-ant/Games',
           ),
         ],
       ),
       _ProjectCategory(
         titleEn: 'Apps & Tools',
         titleTr: 'Uygulamalar & Araçlar',
-        icon: Icons.build_outlined,
-        color: theme.colorScheme.primary,
+        icon: Icons.code_rounded,
+        color: theme.colorScheme.primary, // Mavi
         projects: [
           _Project(
             name: 'SupportDesk',
             descriptionEn:
-                'Bilingual IT support ticket tracker for small teams.',
+                'Bilingual IT support ticket tracker for teams.',
             descriptionTr:
-                'Küçük ekipler için iki dilli IT destek talep takipçisi.',
+                'Ekipler için iki dilli IT destek talep takipçisi.',
             language: 'Dart',
             isPublic: true,
             url:
@@ -143,34 +134,42 @@ class ProjectsScreen extends StatelessWidget {
         ],
       ),
       _ProjectCategory(
-        titleEn: 'Games',
-        titleTr: 'Oyunlar',
-        icon: Icons.sports_esports_outlined,
-        color: theme.colorScheme.tertiary,
+        titleEn: 'Portfolios',
+        titleTr: 'Portfolyolar',
+        icon: Icons.web_rounded,
+        color: theme.colorScheme.secondary, // Mor
         projects: [
           _Project(
-            name: 'Games',
-            descriptionEn: 'Games I\'ve developed.',
-            descriptionTr: 'Geliştirdiğim oyunlar.',
+            name: 'Portfolios',
+            descriptionEn: 'My portfolio websites and web projects.',
+            descriptionTr: 'Portfolyo web sitelerim ve web projelerim.',
             language: 'Dart',
             isPublic: true,
-            url: 'https://github.com/Erhant-ant/Games',
+            url: 'https://github.com/Erhant-ant/Portfolios',
+          ),
+          _Project(
+            name: 'erhan_ant_portfolio',
+            descriptionEn: 'Personal portfolio v1 & v2 website.',
+            descriptionTr: 'Kişisel portfolyo v1 & v2 web sitesi.',
+            language: 'Dart',
+            isPublic: true,
+            url: 'https://github.com/Erhant-ant/erhan_ant_portfolio',
           ),
         ],
       ),
       _ProjectCategory(
-        titleEn: 'Learning & Research',
-        titleTr: 'Eğitim & Araştırma',
-        icon: Icons.school_outlined,
-        color: const Color(0xFF8B5CF6),
+        titleEn: 'IT & Automation',
+        titleTr: 'IT & Otomasyon',
+        icon: Icons.dns_rounded,
+        color: const Color(0xFFF59E0B), // Sarı
         projects: [
           _Project(
             name: 'Learning-and-Research',
             descriptionEn:
-                'My learning journeys and research projects.',
+                'Research on systems, architecture, and network protocols.',
             descriptionTr:
-                'Öğrenme yolculuklarım ve araştırma projelerim.',
-            language: '',
+                'Sistemler, mimari ve ağ protokolleri üzerine araştırmalar.',
+            language: 'Various',
             isPublic: true,
             url:
                 'https://github.com/Erhant-ant/Learning-and-Research',
@@ -178,10 +177,10 @@ class ProjectsScreen extends StatelessWidget {
           _Project(
             name: 'Siemens TIA Portal',
             descriptionEn:
-                'Hands-on PLC, Ladder Logic, HMI and industrial automation.',
+                'Hands-on PLC, Ladder Logic, and industrial automation scripts.',
             descriptionTr:
-                'Uygulamalı PLC, Ladder Logic, HMI ve endüstriyel otomasyon.',
-            language: '',
+                'Uygulamalı PLC, Ladder Logic ve endüstriyel otomasyon scriptleri.',
+            language: 'SCL',
             isPublic: true,
             url:
                 'https://github.com/Erhant-ant/siemens-s7-1200-tia-portal-essentials',
@@ -214,14 +213,14 @@ class ProjectsScreen extends StatelessWidget {
                   // --- Header ---
                   ...[
                     Text(
-                      localized('Projects', 'Projeler'),
+                      localized('Projects & Labs', 'Projeler ve Laboratuvar'),
                       style: theme.textTheme.displayLarge,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     Text(
                       localized(
-                        'My open-source work, organized by category. Click to explore on GitHub.',
-                        'Açık kaynak çalışmalarım, kategorilere ayrılmış. GitHub\'da keşfetmek için tıkla.',
+                        'From immersive games to full-stack applications and IT automation scripts. Click to explore source codes.',
+                        'Sürükleyici oyunlardan full-stack uygulamalara ve IT otomasyonlarına kadar. Kaynak kodları için tıkla.',
                       ),
                       style: theme.textTheme.bodyLarge,
                     ),
@@ -233,29 +232,20 @@ class ProjectsScreen extends StatelessWidget {
                           begin: 0.05,
                           duration: 500.ms,
                           curve: Curves.easeOut),
+                  // Kodu ProjectsScreen içindeki listeleme bölümünde şu şekilde değiştir:
+
                   // --- Category Cards ---
                   ...categories.asMap().entries.map((entry) {
-                    final index = entry.key;
                     final category = entry.value;
                     return Padding(
-                      padding: const EdgeInsets.only(
-                          bottom: AppConstants.space2Xl),
-                      child: _CategorySection(
-                        category: category,
-                        onOpenLink: _openLink,
-                      )
-                          .animate()
-                          .fadeIn(
-                            duration: 600.ms,
-                            delay: (200 + index * 150).ms,
-                            curve: Curves.easeOut,
-                          )
-                          .slideY(
-                            begin: 0.06,
-                            duration: 600.ms,
-                            delay: (200 + index * 150).ms,
-                            curve: Curves.easeOut,
-                          ),
+                      padding: const EdgeInsets.only(bottom: AppConstants.space2Xl),
+                      // İŞTE BÜYÜ: Artık kullanıcı aşağı kaydırdıkça kartlar tek tek belirecek!
+                      child: ScrollReveal(
+                        child: _CategorySection(
+                          category: category,
+                          onOpenLink: _openLink,
+                        ),
+                      ),
                     );
                   }),
                   // --- GitHub CTA ---
@@ -263,10 +253,10 @@ class ProjectsScreen extends StatelessWidget {
                     child: OutlinedButton.icon(
                       onPressed: () => _openLink(
                           context, 'https://github.com/Erhant-ant'),
-                      icon: const FaIcon(FontAwesomeIcons.github, size: 18),
+                      icon: const FaIcon(FontAwesomeIcons.github, size: 20),
                       label: Text(
                         localized(
-                            'Open GitHub Profile', 'GitHub Profilimi Aç'),
+                            'Explore All Repositories', 'Tüm Repoları İncele'),
                       ),
                     ),
                   )
@@ -284,7 +274,6 @@ class ProjectsScreen extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -310,18 +299,18 @@ class _CategorySection extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [
-            category.color.withValues(alpha: isDark ? 0.08 : 0.05),
-            theme.colorScheme.surface,
-          ],
-        ),
-        borderRadius: BorderRadius.circular(20),
+        color: isDark ? const Color(0xFF131B2A) : theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(24),
         border: Border.all(
-          color: category.color.withValues(alpha: 0.18),
+          color: category.color.withValues(alpha: 0.3),
         ),
+        boxShadow: [
+          BoxShadow(
+            color: category.color.withValues(alpha: 0.05),
+            blurRadius: 20,
+            spreadRadius: 2,
+          )
+        ]
       ),
       child: Padding(
         padding: EdgeInsets.all(
@@ -333,14 +322,15 @@ class _CategorySection extends StatelessWidget {
             Row(
               children: [
                 Container(
-                  width: 48,
-                  height: 48,
+                  width: 56,
+                  height: 56,
                   decoration: BoxDecoration(
-                    color: category.color.withValues(alpha: 0.14),
-                    borderRadius: BorderRadius.circular(14),
+                    color: category.color.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(16),
+                    border: Border.all(color: category.color.withValues(alpha: 0.3))
                   ),
                   child: Icon(category.icon,
-                      color: category.color, size: 24),
+                      color: category.color, size: 28),
                 ),
                 const SizedBox(width: AppConstants.spaceMd),
                 Expanded(
@@ -353,6 +343,7 @@ class _CategorySection extends StatelessWidget {
                           fontWeight: FontWeight.w800,
                         ),
                       ),
+                      const SizedBox(height: 4),
                       Text(
                         localized(
                           '${category.projects.length} ${category.projects.length == 1 ? "project" : "projects"}',
@@ -360,7 +351,7 @@ class _CategorySection extends StatelessWidget {
                         ),
                         style: theme.textTheme.bodyMedium?.copyWith(
                           color: category.color,
-                          fontWeight: FontWeight.w600,
+                          fontWeight: FontWeight.w700,
                         ),
                       ),
                     ],
@@ -427,7 +418,6 @@ class _ProjectCardState extends State<_ProjectCard> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final color = widget.categoryColor;
-    final isDark = theme.brightness == Brightness.dark;
 
     return MouseRegion(
       cursor: widget.project.isPublic && widget.project.url != null
@@ -440,51 +430,49 @@ class _ProjectCardState extends State<_ProjectCard> {
             ? () => widget.onOpenLink(context, widget.project.url!)
             : null,
         child: AnimatedContainer(
-          duration: const Duration(milliseconds: 220),
+          duration: const Duration(milliseconds: 250),
           curve: Curves.easeOutCubic,
           padding: const EdgeInsets.all(AppConstants.spaceLg),
           decoration: BoxDecoration(
-            color: _isHovered
-                ? color.withValues(alpha: isDark ? 0.10 : 0.06)
-                : theme.colorScheme.surface,
-            borderRadius: BorderRadius.circular(14),
+            color: theme.colorScheme.surface,
+            borderRadius: BorderRadius.circular(16),
             border: Border.all(
               color: _isHovered
-                  ? color.withValues(alpha: 0.5)
+                  ? color
                   : theme.colorScheme.outline.withValues(alpha: 0.5),
+              width: _isHovered ? 2 : 1,
             ),
             boxShadow: _isHovered
                 ? [
                     BoxShadow(
-                      color: color.withValues(alpha: 0.15),
-                      blurRadius: 24,
+                      color: color.withValues(alpha: 0.25),
+                      blurRadius: 30,
                       spreadRadius: 2,
                       offset: const Offset(0, 4),
                     ),
                   ]
                 : [],
           ),
-          transform: _isHovered
-              ? (Matrix4.identity()..translateByDouble(0.0, -2.0, 0.0, 0.0))
-              : Matrix4.identity(),
+          // HATA BURADAYDI, DOĞRUSU (Matrix4.translationValues) ŞEKLİNDEDİR:
+          transform: Matrix4.translationValues(0, _isHovered ? -6.0 : 0.0, 0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Row(
                 children: [
                   Container(
-                    width: 36,
-                    height: 36,
+                    width: 40,
+                    height: 40,
                     decoration: BoxDecoration(
-                      color: color.withValues(alpha: 0.12),
+                      color: color.withValues(alpha: 0.15),
                       shape: BoxShape.circle,
                     ),
                     child: Icon(
                       widget.project.isPublic
-                          ? Icons.folder_open_outlined
+                          ? Icons.folder_open_rounded
                           : Icons.lock_outline,
                       color: color,
-                      size: 18,
+                      size: 20,
                     ),
                   ),
                   const SizedBox(width: AppConstants.spaceSm),
@@ -492,7 +480,7 @@ class _ProjectCardState extends State<_ProjectCard> {
                     child: Text(
                       widget.project.name,
                       style: theme.textTheme.titleMedium?.copyWith(
-                        fontWeight: FontWeight.w700,
+                        fontWeight: FontWeight.w800,
                       ),
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -504,13 +492,13 @@ class _ProjectCardState extends State<_ProjectCard> {
                       opacity: _isHovered ? 1.0 : 0.3,
                       child: Icon(
                         Icons.arrow_outward,
-                        size: 16,
+                        size: 18,
                         color: color,
                       ),
                     ),
                 ],
               ),
-              const SizedBox(height: AppConstants.spaceSm),
+              const SizedBox(height: AppConstants.spaceMd),
               Text(
                 widget.project.description,
                 style: theme.textTheme.bodyMedium,
@@ -518,44 +506,25 @@ class _ProjectCardState extends State<_ProjectCard> {
                 overflow: TextOverflow.ellipsis,
               ),
               if (widget.project.language.isNotEmpty) ...[
-                const SizedBox(height: AppConstants.spaceSm),
+                const SizedBox(height: AppConstants.spaceLg),
                 Row(
                   children: [
                     Container(
-                      width: 8,
-                      height: 8,
+                      width: 10,
+                      height: 10,
                       decoration: BoxDecoration(
                         color: color,
                         shape: BoxShape.circle,
                       ),
                     ),
-                    const SizedBox(width: 6),
+                    const SizedBox(width: 8),
                     Text(
                       widget.project.language,
                       style: theme.textTheme.labelSmall?.copyWith(
                         color: theme.colorScheme.onSurface
-                            .withValues(alpha: 0.6),
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-              if (!widget.project.isPublic) ...[
-                const SizedBox(height: AppConstants.spaceSm),
-                Row(
-                  children: [
-                    Icon(Icons.lock_outline,
-                        size: 12,
-                        color: theme.colorScheme.onSurface
-                            .withValues(alpha: 0.4)),
-                    const SizedBox(width: 4),
-                    Text(
-                      localized('Private', 'Gizli'),
-                      style: theme.textTheme.labelSmall?.copyWith(
-                        color: theme.colorScheme.onSurface
-                            .withValues(alpha: 0.4),
-                        fontStyle: FontStyle.italic,
+                            .withValues(alpha: 0.7),
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 0.5,
                       ),
                     ),
                   ],

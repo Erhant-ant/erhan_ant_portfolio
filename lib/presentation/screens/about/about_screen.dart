@@ -4,7 +4,6 @@ import 'package:flutter_animate/flutter_animate.dart';
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/utils/responsive.dart';
-import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class AboutScreen extends StatelessWidget {
@@ -13,6 +12,7 @@ class AboutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
     final accent = theme.colorScheme.secondary;
 
     return AppScaffold(
@@ -40,38 +40,47 @@ class AboutScreen extends StatelessWidget {
                     ),
                   ],
                   children: [
-                    // --- Profile Photo ---
+                    // --- Profile Photo with Glowing Tech Effect ---
                     Center(
                       child: SizedBox(
-                        width: 200,
-                        height: 200,
+                        width: 220,
+                        height: 220,
                         child: Stack(
                           clipBehavior: Clip.none,
+                          alignment: Alignment.center,
                           children: [
+                            // Animated Glow Behind
+                            Container(
+                              width: 200,
+                              height: 200,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                boxShadow: [
+                                  BoxShadow(
+                                    color: accent.withValues(alpha: 0.3),
+                                    blurRadius: 40,
+                                    spreadRadius: 10,
+                                  ),
+                                ],
+                              ),
+                            ).animate(onPlay: (controller) => controller.repeat(reverse: true))
+                             .scale(begin: const Offset(0.9, 0.9), end: const Offset(1.1, 1.1), duration: 2.seconds),
 
                             // Photo
-                            Positioned.fill(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  shape: BoxShape.circle,
-                                  border: Border.all(
-                                    color: accent.withValues(alpha: 0.6),
-                                    width: 2,
-                                  ),
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: accent.withValues(alpha: 0.2),
-                                      blurRadius: 28,
-                                      spreadRadius: 2,
-                                    ),
-                                  ],
+                            Container(
+                              width: 180,
+                              height: 180,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(
+                                  color: theme.colorScheme.surface,
+                                  width: 4,
                                 ),
-                                child: CircleAvatar(
-                                  radius: 100,
-                                  backgroundImage: const AssetImage(
-                                    'assets/images/profile.jpeg',
-                                  ),
-                                  backgroundColor: Colors.grey.shade200,
+                              ),
+                              child: ClipOval(
+                                child: Image.asset(
+                                  'assets/images/profile.webp',
+                                  fit: BoxFit.cover,
                                 ),
                               ),
                             ),
@@ -83,7 +92,7 @@ class AboutScreen extends StatelessWidget {
                     const SizedBox(height: AppConstants.space2Xl),
 
                     Text(
-                      localized('A Little About Me', 'Hakkımda'),
+                      localized('The Developer Journey', 'Geliştirici Serüvenim'),
                       style: theme.textTheme.displayMedium,
                     ),
 
@@ -91,8 +100,8 @@ class AboutScreen extends StatelessWidget {
 
                     Text(
                       localized(
-                        'I enjoy exploring technology, solving problems, and building practical projects. My interests include IT support, systems, data management, and modern application development. I like learning by building and turning ideas into useful digital experiences.',
-                        'Teknolojiyi keşfetmeyi, problemleri çözmeyi ve pratik projeler geliştirmeyi seviyorum. İlgi alanlarım arasında IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme bulunuyor. Üreterek öğrenmeyi ve fikirleri kullanışlı dijital deneyimlere dönüştürmeyi seviyorum.',
+                        'I am an active developer passionate about crafting immersive digital experiences and robust systems. Currently, I am heavily focused on developing a large-scale game, which allows me to blend creativity with complex logic. \n\nBeyond game development, my strong background in IT support, systems, and automation empowers me to understand the complete lifecycle of software—from writing the code to maintaining the infrastructure it runs on. I believe in learning by building and turning ambitious ideas into reality.',
+                        'Sürükleyici dijital deneyimler ve güçlü sistemler tasarlama tutkusuna sahip aktif bir geliştiriciyim. Şu sıralar, yaratıcılığımı karmaşık mantıkla harmanlamama olanak tanıyan büyük ölçekli bir oyun geliştirmeye odaklanmış durumdayım. \n\nOyun geliştirmenin ötesinde; IT destek, sistemler ve otomasyon konusundaki güçlü altyapım, kod yazmaktan uygulamanın çalışacağı altyapıyı yönetmeye kadar yazılımın tüm yaşam döngüsüne hakim olmamı sağlıyor. Üreterek öğrenmeye ve iddialı fikirleri gerçeğe dönüştürmeye inanıyorum.',
                       ),
                       style: theme.textTheme.bodyLarge,
                     ),
@@ -108,15 +117,21 @@ class AboutScreen extends StatelessWidget {
                           begin: Alignment.topLeft,
                           end: Alignment.bottomRight,
                           colors: [
-                            accent.withValues(alpha: 0.08),
+                            primary.withValues(alpha: 0.1),
                             theme.colorScheme.surface,
                           ],
                         ),
                         borderRadius:
-                            BorderRadius.circular(AppConstants.radiusMd),
+                            BorderRadius.circular(AppConstants.radiusLg),
                         border: Border.all(
-                          color: accent.withValues(alpha: 0.18),
+                          color: primary.withValues(alpha: 0.2),
                         ),
+                        boxShadow: [
+                          BoxShadow(
+                            color: primary.withValues(alpha: 0.05),
+                            blurRadius: 20,
+                          )
+                        ]
                       ),
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,34 +139,34 @@ class AboutScreen extends StatelessWidget {
                           Row(
                             children: [
                               Container(
-                                padding: const EdgeInsets.all(8),
+                                padding: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  color: accent.withValues(alpha: 0.12),
+                                  color: primary.withValues(alpha: 0.15),
                                   borderRadius: BorderRadius.circular(
                                     AppConstants.radiusSm,
                                   ),
                                 ),
                                 child: Icon(
-                                  Icons.rocket_launch_outlined,
-                                  size: 20,
-                                  color: accent,
+                                  Icons.rocket_launch_rounded,
+                                  size: 24,
+                                  color: primary,
                                 ),
                               ),
                               const SizedBox(width: AppConstants.spaceMd),
                               Text(
                                 localized(
-                                  'Future Direction',
-                                  'Gelecekteki Yönüm',
+                                  'Current Mission & Future',
+                                  'Şu Anki Görevim ve Gelecek',
                                 ),
-                                style: theme.textTheme.displaySmall,
+                                style: theme.textTheme.titleLarge?.copyWith(fontWeight: FontWeight.w800),
                               ),
                             ],
                           ),
                           const SizedBox(height: AppConstants.spaceMd),
                           Text(
                             localized(
-                              'I want to keep learning, building, and exploring different areas of technology while turning ideas into practical projects and meaningful digital experiences.',
-                              'Öğrenmeye, üretmeye ve teknolojinin farklı alanlarını keşfetmeye devam ederken fikirleri pratik projelere ve anlamlı dijital deneyimlere dönüştürmek istiyorum.',
+                              'My primary goal is to successfully launch the major game project I am working on. Alongside this, I aim to keep expanding my full-stack web and IT automation skills to build independent, scalable technology products.',
+                              'Birincil hedefim, şu an üzerinde çalıştığım büyük oyun projesini başarıyla piyasaya sürmek. Bunun yanı sıra, bağımsız ve ölçeklenebilir teknoloji ürünleri geliştirmek için full-stack web ve IT otomasyon becerilerimi genişletmeye devam etmeyi hedefliyorum.',
                             ),
                             style: theme.textTheme.bodyLarge,
                           ),
@@ -163,8 +178,8 @@ class AboutScreen extends StatelessWidget {
 
                     Text(
                       localized(
-                        'Current Focus',
-                        'Şu An Odaklandığım Alanlar',
+                        'Technical Arsenal',
+                        'Teknik Cephanelik',
                       ),
                       style: theme.textTheme.displaySmall,
                     ),
@@ -176,39 +191,39 @@ class AboutScreen extends StatelessWidget {
                       runSpacing: AppConstants.spaceSm,
                       children: [
                         _FocusPill(
-                          label: 'IT Support',
-                          icon: Icons.support_agent_outlined,
+                          label: 'Game Development',
+                          icon: Icons.sports_esports_rounded,
+                          color: const Color(0xFF10B981), // Yeşil
+                        ),
+                        _FocusPill(
+                          label: 'Full-Stack Web',
+                          icon: Icons.code_rounded,
+                          color: primary,
+                        ),
+                        _FocusPill(
+                          label: 'Systems & IT Support',
+                          icon: Icons.dns_rounded,
                           color: accent,
                         ),
                         _FocusPill(
-                          label: 'Systems',
-                          icon: Icons.desktop_windows_outlined,
-                          color: theme.colorScheme.primary,
-                        ),
-                        _FocusPill(
-                          label: 'SQL',
-                          icon: Icons.storage_outlined,
+                          label: 'SQL & Data',
+                          icon: Icons.storage_rounded,
                           color: theme.colorScheme.tertiary,
                         ),
                         _FocusPill(
                           label: 'Networking',
-                          icon: Icons.lan_outlined,
-                          color: accent,
-                        ),
-                        _FocusPill(
-                          label: 'Web Dev',
-                          icon: Icons.web_outlined,
-                          color: theme.colorScheme.primary,
+                          icon: Icons.lan_rounded,
+                          color: primary,
                         ),
                         _FocusPill(
                           label: localized('AI Tools', 'Yapay Zeka Araçları'),
                           icon: Icons.psychology_outlined,
-                          color: theme.colorScheme.tertiary,
+                          color: accent,
                         ),
                         _FocusPill(
                           label: localized('Automation', 'Otomasyon'),
                           icon: Icons.auto_mode_outlined,
-                          color: theme.colorScheme.primary.withAlpha(200),
+                          color: const Color(0xFFF59E0B), // Sarı
                         ),
                       ],
                     ),
@@ -217,7 +232,6 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -243,15 +257,15 @@ class _FocusPill extends StatelessWidget {
         vertical: AppConstants.spaceSm,
       ),
       decoration: BoxDecoration(
-        color: color.withValues(alpha: 0.10),
-        border: Border.all(color: color.withValues(alpha: 0.25)),
+        color: color.withValues(alpha: 0.12),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(AppConstants.radiusFull),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 6),
+          Icon(icon, size: 18, color: color),
+          const SizedBox(width: 8),
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(

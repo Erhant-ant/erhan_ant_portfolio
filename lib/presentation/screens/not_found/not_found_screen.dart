@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_animate/flutter_animate.dart';
 import 'package:go_router/go_router.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
 import '../../../core/router/app_router.dart';
-import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class NotFoundScreen extends StatelessWidget {
@@ -13,63 +13,91 @@ class NotFoundScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final accent = theme.colorScheme.secondary;
 
     return AppScaffold(
       body: PageScrollWrapper(
         padding: const EdgeInsets.symmetric(
           horizontal: AppConstants.space2Xl,
-          vertical: 64,
+          vertical: 100,
         ),
         children: [
           Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(
-                Icons.search_off_rounded,
-                size: 120,
-                color: theme.colorScheme.secondary.withValues(alpha: 0.5),
-              ),
+              // Glitch Icon Effect
+              Container(
+                padding: const EdgeInsets.all(32),
+                decoration: BoxDecoration(
+                  color: accent.withValues(alpha: 0.1),
+                  shape: BoxShape.circle,
+                  boxShadow: [
+                    BoxShadow(color: accent.withValues(alpha: 0.2), blurRadius: 40, spreadRadius: 10)
+                  ]
+                ),
+                child: Icon(
+                  Icons.bug_report_rounded,
+                  size: 80,
+                  color: accent,
+                ),
+              ).animate(onPlay: (c) => c.repeat(reverse: true))
+               .fadeIn(duration: 1.seconds)
+               .shimmer(duration: 2.seconds, color: accent.withValues(alpha: 0.5)),
+               
               const SizedBox(height: AppConstants.space2Xl),
+              
               Text(
                 '404',
                 style: theme.textTheme.displayLarge?.copyWith(
                   fontWeight: FontWeight.w900,
-                  color: theme.colorScheme.secondary,
+                  fontSize: 80,
+                  color: accent,
+                  letterSpacing: 4,
                 ),
               ),
-              const SizedBox(height: AppConstants.spaceMd),
+              
+              const SizedBox(height: AppConstants.spaceSm),
+              
               Text(
                 localized(
-                  'Oops! Page not found.',
-                  'Hoppala! Sayfa bulunamadı.',
+                  'SYSTEM ERROR / LEVEL NOT FOUND',
+                  'SİSTEM HATASI / BÖLÜM BULUNAMADI',
                 ),
-                style: theme.textTheme.displaySmall,
+                style: theme.textTheme.titleLarge?.copyWith(
+                  fontWeight: FontWeight.w800,
+                  letterSpacing: 2,
+                ),
                 textAlign: TextAlign.center,
               ),
+              
               const SizedBox(height: AppConstants.spaceLg),
+              
               ConstrainedBox(
                 constraints: const BoxConstraints(maxWidth: 500),
                 child: Text(
                   localized(
-                    'The page you are looking for might have been removed, had its name changed, or is temporarily unavailable.',
-                    'Aradığınız sayfa kaldırılmış, adı değiştirilmiş veya geçici olarak kullanım dışı olabilir.',
+                    'The digital coordinate you are trying to reach has either been removed, renamed, or is currently out of bounds.',
+                    'Ulaşmaya çalıştığınız dijital koordinat silinmiş, yeniden adlandırılmış veya şu an oyun sınırları dışında olabilir.',
                   ),
-                  style: theme.textTheme.bodyLarge,
+                  style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
                   textAlign: TextAlign.center,
                 ),
               ),
+              
               const SizedBox(height: AppConstants.space3Xl),
+              
               ElevatedButton.icon(
                 onPressed: () => context.go(AppRoutes.home),
-                icon: const Icon(Icons.home),
+                icon: const Icon(Icons.home_rounded),
                 label: Text(
-                  localized('Back to Home', 'Ana Sayfaya Dön'),
+                  localized('Reboot System (Return Home)', 'Sistemi Yeniden Başlat (Ana Sayfa)'),
                 ),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: AppConstants.space2Xl,
-                    vertical: AppConstants.spaceMd,
+                    horizontal: 32,
+                    vertical: 20,
                   ),
+                  backgroundColor: accent,
                 ),
               ),
               const SizedBox(height: 100),

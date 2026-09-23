@@ -7,15 +7,21 @@ import '../../../core/localization/app_language.dart';
 import '../../../core/router/app_router.dart';
 import '../../../core/utils/cv_downloader.dart';
 import '../../../core/utils/responsive.dart';
-import '../../widgets/layout/app_footer.dart';
 import '../../widgets/layout/app_scaffold.dart';
 
 class CvScreen extends StatelessWidget {
   const CvScreen({super.key});
 
+  // İleride PDF butonunu açmak istersen burayı "true" yapman yeterli.
+  static const bool _showPdfButton = false;
+
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final primary = theme.colorScheme.primary;
+    final accent = theme.colorScheme.secondary;
+    final emerald = const Color(0xFF10B981);
+    final amber = const Color(0xFFF59E0B);
 
     return AppScaffold(
       pageTitleBuilder: () => 'CV | Erhan Ant',
@@ -27,7 +33,7 @@ class CvScreen extends StatelessWidget {
         children: [
           Center(
             child: ConstrainedBox(
-              constraints: const BoxConstraints(maxWidth: 800),
+              constraints: const BoxConstraints(maxWidth: 900), // CV için biraz daha geniş alan
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: AnimateList(
@@ -43,38 +49,40 @@ class CvScreen extends StatelessWidget {
                   children: [
                     // --- Header ---
                     Text(
-                      localized('CV Summary', 'CV Özeti'),
+                      localized('Curriculum Vitae', 'Özgeçmiş'),
                       style: theme.textTheme.displayLarge,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     Text(
                       localized(
-                        'Erhan Ant - IT & Software',
-                        'Erhan Ant - IT & Yazılım',
+                        'Erhan Ant - Software & Game Developer',
+                        'Erhan Ant - Yazılım ve Oyun Geliştirici',
                       ),
-                      style: theme.textTheme.displaySmall,
+                      style: theme.textTheme.displaySmall?.copyWith(color: primary),
                     ),
 
                     // --- Profile ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    const SizedBox(height: AppConstants.space3Xl),
                     _SectionHeader(
                       icon: Icons.person_outline,
-                      title: localized('Profile', 'Profil'),
+                      title: localized('Profile Summary', 'Profil Özeti'),
+                      color: primary,
                     ),
-                    const SizedBox(height: AppConstants.spaceSm),
+                    const SizedBox(height: AppConstants.spaceMd),
                     Text(
                       localized(
-                        'Passionate about technology, software development, and practical problem solving. Interested in IT support, systems, data management, and modern application development, with a focus on learning, building, and turning ideas into useful digital experiences.',
-                        'Teknoloji, yazılım geliştirme ve pratik problem çözmeye ilgi duyuyorum. IT destek, sistemler, veri yönetimi ve modern uygulama geliştirme alanlarına odaklanıyor; öğrenmeye, üretmeye ve fikirleri kullanışlı dijital deneyimlere dönüştürmeye önem veriyorum.',
+                        'A dedicated developer with a unique blend of skills spanning game development, full-stack software, and IT infrastructure. I thrive on building complex systems—whether it’s architecting game logic, writing web apps, or managing and automating networks. Always learning, building, and pushing technical boundaries.',
+                        'Oyun geliştirme, full-stack yazılım ve IT altyapısını kapsayan benzersiz bir beceri setine sahip kendini adamış bir geliştirici. İster oyun mantığı tasarlamak, ister web uygulamaları yazmak ya da ağları yönetip otomatize etmek olsun, karmaşık sistemler kurmayı seviyorum. Sürekli öğreniyor, üretiyor ve teknik sınırlarımı zorluyorum.',
                       ),
-                      style: theme.textTheme.bodyLarge,
+                      style: theme.textTheme.bodyLarge?.copyWith(height: 1.6),
                     ),
 
                     // --- Core Skills ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    const SizedBox(height: AppConstants.space3Xl),
                     _SectionHeader(
-                      icon: Icons.auto_awesome_outlined,
-                      title: localized('Core Skills', 'Temel Yetkinlikler'),
+                      icon: Icons.auto_awesome_rounded,
+                      title: localized('Core Expertise', 'Temel Yetkinlikler'),
+                      color: accent,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     Wrap(
@@ -82,183 +90,148 @@ class CvScreen extends StatelessWidget {
                       runSpacing: AppConstants.spaceSm,
                       children: [
                         _SkillPill(
-                          label: 'IT Support',
-                          icon: Icons.support_agent_outlined,
-                          color: theme.colorScheme.secondary,
+                          label: 'Game Development',
+                          icon: Icons.sports_esports_rounded,
+                          color: emerald,
                         ),
                         _SkillPill(
-                          label: 'Windows Systems',
-                          icon: Icons.desktop_windows_outlined,
-                          color: theme.colorScheme.primary,
+                          label: 'Full-Stack Apps',
+                          icon: Icons.code_rounded,
+                          color: accent,
                         ),
                         _SkillPill(
-                          label: 'Hardware Support',
-                          icon: Icons.memory_outlined,
+                          label: 'IT Support & Systems',
+                          icon: Icons.dns_rounded,
+                          color: primary,
+                        ),
+                        _SkillPill(
+                          label: 'SQL & Data',
+                          icon: Icons.storage_rounded,
                           color: theme.colorScheme.tertiary,
                         ),
                         _SkillPill(
-                          label: 'SQL',
-                          icon: Icons.storage_outlined,
-                          color: theme.colorScheme.secondary,
-                        ),
-                        _SkillPill(
-                          label: 'Networking',
-                          icon: Icons.lan_outlined,
-                          color: theme.colorScheme.primary,
-                        ),
-                        _SkillPill(
-                          label: 'Java',
-                          icon: Icons.code_outlined,
-                          color: theme.colorScheme.tertiary,
-                        ),
-                        _SkillPill(
-                          label: 'MS Office',
-                          icon: Icons.business_center_outlined,
-                          color: theme.colorScheme.secondary,
+                          label: 'Hardware & Network',
+                          icon: Icons.lan_rounded,
+                          color: primary,
                         ),
                         _SkillPill(
                           label: localized('Automation', 'Otomasyon'),
-                          icon: Icons.auto_mode_outlined,
-                          color: theme.colorScheme.primary.withAlpha(200),
+                          icon: Icons.auto_mode_rounded,
+                          color: amber,
                         ),
                       ],
                     ),
 
-                    // --- Completed Certification ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    // --- Experience ---
+                    const SizedBox(height: AppConstants.space3Xl),
                     _SectionHeader(
-                      icon: Icons.verified_outlined,
-                      title: localized(
-                        'Completed Certification',
-                        'Tamamlanan Sertifika',
-                      ),
+                      icon: Icons.work_outline,
+                      title: localized('Professional Experience', 'Profesyonel Deneyim'),
+                      color: primary,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     _TimelineCard(
-                      icon: Icons.verified_outlined,
-                      accentColor: theme.colorScheme.secondary,
-                      title:
-                          'Google IT Support Professional Certificate',
-                      subtitle: 'Coursera',
-                      badge: localized('Completed', 'Tamamlandı'),
-                    ),
-
-                    // --- Ongoing Learning ---
-                    const SizedBox(height: AppConstants.space2Xl),
-                    _SectionHeader(
-                      icon: Icons.school_outlined,
-                      title: localized(
-                        'Ongoing Learning',
-                        'Devam Eden Eğitimler',
+                      icon: Icons.inventory_2_rounded,
+                      accentColor: primary,
+                      title: 'Amazon Fulfillment Center',
+                      subtitle: localized(
+                        'Warehouse Associate, 2024 - 2025.\nSupported daily operations, digital process tracking, inventory control, and shipping workflows with precision.',
+                        'Warehouse Associate, 2024 - 2025.\nGünlük operasyonlar, dijital süreç takibi, stok kontrolü ve sevkiyat iş akışlarında hassasiyetle görev aldım.',
                       ),
                     ),
-                    const SizedBox(height: AppConstants.spaceMd),
-                    Wrap(
-                      spacing: AppConstants.spaceSm,
-                      runSpacing: AppConstants.spaceSm,
-                      children: [
-                        _SkillPill(
-                          label: 'Siemens TIA Portal',
-                          icon: Icons.precision_manufacturing_outlined,
-                          color: theme.colorScheme.primary,
-                        ),
-                        _SkillPill(
-                          label: 'Microsoft Data Analyst',
-                          icon: Icons.bar_chart_outlined,
-                          color: theme.colorScheme.secondary,
-                        ),
-                        _SkillPill(
-                          label: 'Microsoft 365 Fundamentals',
-                          icon: Icons.cloud_outlined,
-                          color: theme.colorScheme.tertiary,
-                        ),
-                        _SkillPill(
-                          label: 'SQL Fundamentals',
-                          icon: Icons.storage_outlined,
-                          color: theme.colorScheme.primary,
-                        ),
-                        _SkillPill(
-                          label: 'Web Dev',
-                          icon: Icons.web_outlined,
-                          color: theme.colorScheme.secondary,
-                        ),
-                        _SkillPill(
-                          label: 'Firebase',
-                          icon: Icons.local_fire_department_outlined,
-                          color: theme.colorScheme.tertiary,
-                        ),
-                        _SkillPill(
-                          label: localized('AI Tools', 'Yapay Zeka Araçları'),
-                          icon: Icons.psychology_outlined,
-                          color: theme.colorScheme.primary,
-                        ),
-                      ],
-                    ),
 
-                    // --- Education ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    // --- Education & Certifications (Combined & Upgraded) ---
+                    const SizedBox(height: AppConstants.space3Xl),
                     _SectionHeader(
-                      icon: Icons.account_balance_outlined,
-                      title: localized('Education', 'Eğitim'),
+                      icon: Icons.account_balance_rounded,
+                      title: localized('Education & Certifications', 'Eğitim & Sertifikalar'),
+                      color: emerald,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     _TimelineCard(
-                      icon: Icons.school_outlined,
-                      accentColor: theme.colorScheme.primary,
+                      icon: Icons.school_rounded,
+                      accentColor: primary,
                       title: 'Passaic County Community College',
                       subtitle: localized(
                         'Associate Degree in Computer Science, Ongoing',
-                        'Bilgisayar Bilimleri Ön Lisans Derecesi, Devam ',
+                        'Bilgisayar Bilimleri Ön Lisans Derecesi, Devam Ediyor',
                       ),
+                      badge: localized('Academic', 'Akademik'),
                     ),
-                    const SizedBox(height: AppConstants.spaceSm),
+                    const SizedBox(height: AppConstants.spaceMd),
                     _TimelineCard(
-                      icon: Icons.account_balance_outlined,
+                      icon: Icons.security_rounded,
+                      accentColor: emerald,
+                      title: 'Google IT Support Professional Certificate',
+                      subtitle: localized(
+                        'Coursera. Covers IT support fundamentals, troubleshooting, operating systems, networking, and system administration.',
+                        'Coursera. IT destek temelleri, sorun giderme, işletim sistemleri, ağlar ve sistem yönetimini kapsar.',
+                      ),
+                      badge: localized('Completed', 'Tamamlandı'),
+                    ),
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _TimelineCard(
+                      icon: Icons.account_balance_rounded,
                       accentColor: theme.colorScheme.tertiary,
                       title: 'Izmir Katip Celebi University',
                       subtitle: localized(
                         'Bachelor\'s Degree in Business Administration, 2018',
                         'İşletme Lisans Programı, 2018',
                       ),
+                      badge: localized('Academic', 'Akademik'),
                     ),
 
-                    // --- Experience ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    // --- Ongoing Learning & Research ---
+                    const SizedBox(height: AppConstants.space3Xl),
                     _SectionHeader(
-                      icon: Icons.work_outline,
-                      title: localized('Experience', 'Deneyim'),
+                      icon: Icons.autorenew_rounded,
+                      title: localized('Ongoing Research & Learning', 'Devam Eden Araştırmalar'),
+                      color: amber,
                     ),
                     const SizedBox(height: AppConstants.spaceMd),
                     _TimelineCard(
-                      icon: Icons.inventory_2_outlined,
-                      accentColor: theme.colorScheme.secondary,
-                      title: 'Amazon Fulfillment Center',
+                      icon: Icons.precision_manufacturing_rounded,
+                      accentColor: amber,
+                      title: 'Siemens PLC and TIA Portal Essentials',
                       subtitle: localized(
-                        'Warehouse Associate, 2024 - 2025. Supported daily operations, digital process tracking, inventory control, and shipping workflows.',
-                        'Warehouse Associate, 2024 - 2025. Günlük operasyonlar, dijital süreç takibi, stok kontrolü ve sevkiyat iş akışları içinde görev aldım.',
+                        'Coursera. Learning basic PLC programming and industrial automation workflows.',
+                        'Coursera. Temel PLC programlama ve endüstriyel otomasyon iş akışları öğrenimi.',
                       ),
+                      badge: localized('In Progress', 'Devam Ediyor'),
+                    ),
+                    const SizedBox(height: AppConstants.spaceMd),
+                    _TimelineCard(
+                      icon: Icons.insights_rounded,
+                      accentColor: theme.colorScheme.tertiary,
+                      title: 'Microsoft Data Analyst & 365 Fundamentals',
+                      subtitle: localized(
+                        'Microsoft. Developing foundational skills in data analysis, reporting, and core workspace tools.',
+                        'Microsoft. Veri analizi, raporlama ve temel iş yeri araçlarında yetkinlik geliştirimi.',
+                      ),
+                      badge: localized('In Progress', 'Devam Ediyor'),
                     ),
 
                     // --- Action Buttons ---
-                    const SizedBox(height: AppConstants.space2Xl),
+                    const SizedBox(height: AppConstants.space3Xl),
                     Wrap(
                       spacing: AppConstants.spaceMd,
                       runSpacing: AppConstants.spaceSm,
                       children: [
-                        ElevatedButton.icon(
-                          onPressed: () => downloadCvFile(),
-                          icon: const Icon(Icons.download_outlined),
-                          label: Text(
-                            localized('Download CV PDF', 'CV PDF Indir'),
+                        if (_showPdfButton)
+                          ElevatedButton.icon(
+                            onPressed: () => downloadCvFile(),
+                            icon: const Icon(Icons.download_rounded),
+                            label: Text(
+                              localized('Download CV PDF', 'CV PDF Indir'),
+                            ),
                           ),
-                        ),
                         OutlinedButton.icon(
                           onPressed: () {
                             context.go(AppRoutes.contact);
                           },
-                          icon: const Icon(Icons.forum_outlined),
+                          icon: const Icon(Icons.forum_rounded),
                           label: Text(
-                            localized('Contact Details', 'İletişim Bilgileri'),
+                            localized('Contact Me', 'Benimle İletişime Geç'),
                           ),
                         ),
                       ],
@@ -268,7 +241,6 @@ class CvScreen extends StatelessWidget {
               ),
             ),
           ),
-
         ],
       ),
     );
@@ -277,33 +249,38 @@ class CvScreen extends StatelessWidget {
 
 /// Section header with an icon and colored title line
 class _SectionHeader extends StatelessWidget {
-  const _SectionHeader({required this.icon, required this.title});
+  const _SectionHeader({required this.icon, required this.title, required this.color});
 
   final IconData icon;
   final String title;
+  final Color color;
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
-    final accent = theme.colorScheme.secondary;
 
     return Row(
       children: [
         Container(
-          padding: const EdgeInsets.all(8),
+          padding: const EdgeInsets.all(10),
           decoration: BoxDecoration(
-            color: accent.withValues(alpha: 0.12),
+            color: color.withValues(alpha: 0.15),
             borderRadius: BorderRadius.circular(AppConstants.radiusSm),
+            border: Border.all(color: color.withValues(alpha: 0.3)),
           ),
-          child: Icon(icon, size: 20, color: accent),
+          child: Icon(icon, size: 22, color: color),
         ),
         const SizedBox(width: AppConstants.spaceMd),
-        Text(title, style: theme.textTheme.displaySmall),
+        Text(title, style: theme.textTheme.displaySmall?.copyWith(fontWeight: FontWeight.w800)),
         const SizedBox(width: AppConstants.spaceMd),
         Expanded(
           child: Container(
-            height: 1,
-            color: theme.colorScheme.outline.withValues(alpha: 0.5),
+            height: 2,
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: [color.withValues(alpha: 0.5), color.withValues(alpha: 0)]
+              )
+            ),
           ),
         ),
       ],
@@ -328,18 +305,18 @@ class _SkillPill extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.spaceMd,
-        vertical: AppConstants.spaceSm,
+        vertical: 10,
       ),
       decoration: BoxDecoration(
         color: color.withValues(alpha: 0.10),
-        border: Border.all(color: color.withValues(alpha: 0.25)),
+        border: Border.all(color: color.withValues(alpha: 0.3)),
         borderRadius: BorderRadius.circular(AppConstants.radiusFull),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Icon(icon, size: 16, color: color),
-          const SizedBox(width: 6),
+          Icon(icon, size: 18, color: color),
+          const SizedBox(width: 8),
           Text(
             label,
             style: Theme.of(context).textTheme.bodyMedium?.copyWith(
@@ -372,25 +349,36 @@ class _TimelineCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
+    final isDark = theme.brightness == Brightness.dark;
 
     return Container(
       decoration: BoxDecoration(
-        color: theme.colorScheme.surface,
-        borderRadius: BorderRadius.circular(AppConstants.radiusMd),
-        border: Border.all(color: theme.colorScheme.outline),
+        color: isDark ? const Color(0xFF131B2A) : theme.colorScheme.surface,
+        borderRadius: BorderRadius.circular(16),
+        border: Border.all(color: theme.colorScheme.outline.withValues(alpha: 0.6)),
+        boxShadow: [
+          BoxShadow(
+            color: Colors.black.withValues(alpha: 0.05),
+            blurRadius: 10,
+            offset: const Offset(0, 4)
+          )
+        ]
       ),
       child: IntrinsicHeight(
         child: Row(
           children: [
-            // Accent left bar
+            // Glowing Accent left bar
             Container(
-              width: 4,
+              width: 6,
               decoration: BoxDecoration(
                 color: accentColor,
                 borderRadius: const BorderRadius.only(
-                  topLeft: Radius.circular(AppConstants.radiusMd),
-                  bottomLeft: Radius.circular(AppConstants.radiusMd),
+                  topLeft: Radius.circular(16),
+                  bottomLeft: Radius.circular(16),
                 ),
+                boxShadow: [
+                  BoxShadow(color: accentColor.withValues(alpha: 0.5), blurRadius: 8)
+                ]
               ),
             ),
             Expanded(
@@ -400,12 +388,13 @@ class _TimelineCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Container(
-                      padding: const EdgeInsets.all(8),
+                      padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
                         color: accentColor.withValues(alpha: 0.12),
                         shape: BoxShape.circle,
+                        border: Border.all(color: accentColor.withValues(alpha: 0.2)),
                       ),
-                      child: Icon(icon, size: 20, color: accentColor),
+                      child: Icon(icon, size: 24, color: accentColor),
                     ),
                     const SizedBox(width: AppConstants.spaceMd),
                     Expanded(
@@ -414,34 +403,39 @@ class _TimelineCard extends StatelessWidget {
                         children: [
                           Text(
                             title,
-                            style: theme.textTheme.titleMedium?.copyWith(
-                              fontWeight: FontWeight.w700,
+                            style: theme.textTheme.titleLarge?.copyWith(
+                              fontWeight: FontWeight.w800,
                             ),
                           ),
-                          const SizedBox(height: AppConstants.spaceXs),
+                          const SizedBox(height: 6),
                           Text(
                             subtitle,
-                            style: theme.textTheme.bodyMedium,
+                            style: theme.textTheme.bodyLarge?.copyWith(
+                              color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+                              height: 1.5,
+                            ),
                           ),
                           if (badge != null) ...[
-                            const SizedBox(height: AppConstants.spaceSm),
+                            const SizedBox(height: AppConstants.spaceMd),
                             Container(
                               padding: const EdgeInsets.symmetric(
-                                horizontal: AppConstants.spaceSm,
-                                vertical: AppConstants.spaceXs,
+                                horizontal: 12,
+                                vertical: 6,
                               ),
                               decoration: BoxDecoration(
-                                color: accentColor.withValues(alpha: 0.12),
+                                color: accentColor.withValues(alpha: 0.15),
                                 borderRadius: BorderRadius.circular(
                                   AppConstants.radiusFull,
                                 ),
+                                border: Border.all(color: accentColor.withValues(alpha: 0.3))
                               ),
                               child: Text(
                                 badge!,
                                 style:
                                     theme.textTheme.labelSmall?.copyWith(
                                       color: accentColor,
-                                      fontWeight: FontWeight.w700,
+                                      fontWeight: FontWeight.w800,
+                                      letterSpacing: 0.5,
                                     ),
                               ),
                             ),

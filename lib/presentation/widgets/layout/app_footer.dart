@@ -5,6 +5,8 @@ import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_constants.dart';
 import '../../../core/localization/app_language.dart';
+// Yeni logomuzu aynı klasördeki app_scaffold dosyasından çekiyoruz
+import 'app_scaffold.dart' show BrandLogo; 
 
 class AppFooter extends StatelessWidget {
   const AppFooter({super.key});
@@ -28,25 +30,16 @@ class AppFooter extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
-    final accent = theme.colorScheme.secondary;
+    final primary = theme.colorScheme.primary;
 
     return Container(
       width: double.infinity,
-      margin: const EdgeInsets.only(top: AppConstants.space3Xl),
       decoration: BoxDecoration(
-        gradient: LinearGradient(
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-          colors: [
-            theme.colorScheme.surface,
-            isDark
-                ? const Color(0xFF0D1014)
-                : const Color(0xFFEFF1F4),
-          ],
-        ),
+        color: isDark ? const Color(0xFF070A10) : theme.colorScheme.surface,
         border: Border(
           top: BorderSide(
-            color: accent.withValues(alpha: 0.15),
+            color: primary.withValues(alpha: 0.15),
+            width: 1,
           ),
         ),
       ),
@@ -59,28 +52,35 @@ class AppFooter extends StatelessWidget {
             padding: const EdgeInsets.only(
               left: AppConstants.spaceLg,
               right: AppConstants.spaceLg,
-              top: AppConstants.spaceLg,
-              bottom: AppConstants.spaceXl,
+              top: 48,
+              bottom: 32,
             ),
             child: Column(
               children: [
-                // Logo mark
-                Text(
-                  'EA',
-                  style: theme.textTheme.displaySmall?.copyWith(
-                    fontWeight: FontWeight.w900,
-                    letterSpacing: 2,
-                    color: accent,
-                  ),
-                ),
-                const SizedBox(height: AppConstants.spaceSm),
+                // YENİ DEVASA EANT STUDIO LOGOMUZ 
+                // Footer'da metni açık bırakıyoruz ki kapsül devasa görünsün
+                const BrandLogo(fontSize: 32, showText: true),
+                
+                const SizedBox(height: AppConstants.spaceLg),
                 Text(
                   localized(
-                    'Learning, building, and growing.',
-                    'Öğreniyor, üretiyor, gelişiyor.',
+                    'Building systems, games, and applications.',
+                    'Sistemler, oyunlar ve uygulamalar geliştiriyor.',
                   ),
                   style: theme.textTheme.bodyMedium?.copyWith(
-                    fontStyle: FontStyle.italic,
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: AppConstants.spaceLg),
+                Text(
+                  localized(
+                    'Building systems, games, and applications.',
+                    'Sistemler, oyunlar ve uygulamalar geliştiriyor.',
+                  ),
+                  style: theme.textTheme.bodyMedium?.copyWith(
+                    color: theme.colorScheme.onSurface.withValues(alpha: 0.6),
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
                 const SizedBox(height: AppConstants.spaceLg),
@@ -90,19 +90,19 @@ class AppFooter extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     _SocialIconButton(
-                      iconWidget: FaIcon(FontAwesomeIcons.github, size: 18),
+                      iconWidget: const FaIcon(FontAwesomeIcons.github, size: 20),
                       tooltip: 'GitHub',
                       onTap: () => _openLink(
                           context, 'https://github.com/Erhant-ant'),
-                      color: accent,
+                      color: theme.colorScheme.secondary,
                     ),
                     const SizedBox(width: AppConstants.spaceMd),
                     _SocialIconButton(
-                      iconWidget: FaIcon(FontAwesomeIcons.linkedinIn, size: 18),
+                      iconWidget: const FaIcon(FontAwesomeIcons.linkedinIn, size: 20),
                       tooltip: 'LinkedIn',
                       onTap: () => _openLink(context,
                           'https://www.linkedin.com/in/erhan-ant-328380359'),
-                      color: accent,
+                      color: const Color(0xFF0A66C2),
                     ),
                   ],
                 ),
@@ -110,14 +110,14 @@ class AppFooter extends StatelessWidget {
 
                 // Separator
                 Container(
-                  width: 60,
+                  width: 100,
                   height: 2,
                   decoration: BoxDecoration(
                     gradient: LinearGradient(
                       colors: [
-                        accent.withValues(alpha: 0),
-                        accent.withValues(alpha: 0.5),
-                        accent.withValues(alpha: 0),
+                        primary.withValues(alpha: 0),
+                        primary.withValues(alpha: 0.5),
+                        primary.withValues(alpha: 0),
                       ],
                     ),
                     borderRadius: BorderRadius.circular(1),
@@ -128,37 +128,28 @@ class AppFooter extends StatelessWidget {
                 // Nav links
                 Wrap(
                   alignment: WrapAlignment.center,
-                  spacing: AppConstants.spaceSm,
+                  spacing: AppConstants.spaceMd,
                   runSpacing: AppConstants.spaceXs,
                   children: [
-                    _FooterLink(
-                        label: localized('Home', 'Ana Sayfa'),
-                        route: '/'),
-                    _FooterLink(
-                        label: localized('About', 'Hakkımda'),
-                        route: '/about'),
-                    _FooterLink(
-                        label: localized('Projects', 'Projeler'),
-                        route: '/projects'),
-                    _FooterLink(
-                        label:
-                            localized('Learning', 'Eğitimler'),
-                        route: '/certificates'),
+                    _FooterLink(label: localized('Home', 'Ana Sayfa'), route: '/'),
+                    _FooterLink(label: localized('About', 'Hakkımda'), route: '/about'),
+                    _FooterLink(label: localized('Projects', 'Projeler'), route: '/projects'),
+                    const _FooterLink(label: 'Blog', route: '/blog'),
                     const _FooterLink(label: 'CV', route: '/cv'),
-                    _FooterLink(
-                        label:
-                            localized('Contact', 'İletişim'),
-                        route: '/contact'),
+                    _FooterLink(label: localized('Contact', 'İletişim'), route: '/contact'),
                   ],
                 ),
-                const SizedBox(height: AppConstants.spaceLg),
+                const SizedBox(height: AppConstants.space2Xl),
 
                 // Copyright
+                // Copyright
                 Text(
-                  '© 2026 Erhan Ant. ${localized('All rights reserved.', 'Tüm hakları saklıdır.')}',
+                  '© ${DateTime.now().year} EANT Studio. ${localized('All rights reserved.', 'Tüm hakları saklıdır.')}',
                   style: theme.textTheme.bodySmall?.copyWith(
                     color: theme.colorScheme.onSurface
-                        .withValues(alpha: 0.45),
+                        .withValues(alpha: 0.4),
+                    fontWeight: FontWeight.w600,
+                    letterSpacing: 1.0,
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -193,6 +184,8 @@ class _SocialIconButtonState extends State<_SocialIconButton> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       onEnter: (_) => setState(() => _isHovered = true),
@@ -204,26 +197,27 @@ class _SocialIconButtonState extends State<_SocialIconButton> {
           child: AnimatedContainer(
             duration: const Duration(milliseconds: 200),
             curve: Curves.easeOut,
-            width: 44,
-            height: 44,
+            width: 48,
+            height: 48,
             decoration: BoxDecoration(
               color: _isHovered
-                  ? widget.color.withValues(alpha: 0.14)
-                  : Colors.transparent,
+                  ? widget.color.withValues(alpha: 0.15)
+                  : theme.colorScheme.surface,
               shape: BoxShape.circle,
               border: Border.all(
                 color: _isHovered
                     ? widget.color.withValues(alpha: 0.5)
-                    : widget.color.withValues(alpha: 0.2),
+                    : theme.colorScheme.outline.withValues(alpha: 0.3),
               ),
+              boxShadow: _isHovered ? [BoxShadow(color: widget.color.withValues(alpha: 0.2), blurRadius: 10)] : [],
             ),
             child: Center(
               child: IconTheme(
                 data: IconThemeData(
-                  size: 18,
+                  size: 20,
                   color: _isHovered
                       ? widget.color
-                      : widget.color.withValues(alpha: 0.6),
+                      : theme.colorScheme.onSurface.withValues(alpha: 0.7),
                 ),
                 child: widget.iconWidget,
               ),
@@ -243,9 +237,12 @@ class _FooterLink extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
+    
     return TextButton(
       onPressed: () => context.go(route),
       style: TextButton.styleFrom(
+        foregroundColor: theme.colorScheme.onSurface.withValues(alpha: 0.7),
         padding: const EdgeInsets.symmetric(
           horizontal: AppConstants.spaceSm,
           vertical: AppConstants.spaceXs,
@@ -255,8 +252,9 @@ class _FooterLink extends StatelessWidget {
       ),
       child: Text(
         label,
-        style: Theme.of(context).textTheme.bodySmall?.copyWith(
-              fontWeight: FontWeight.w500,
+        style: theme.textTheme.bodySmall?.copyWith(
+              fontWeight: FontWeight.w700,
+              letterSpacing: 0.5,
             ),
       ),
     );

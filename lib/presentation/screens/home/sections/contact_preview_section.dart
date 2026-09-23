@@ -12,6 +12,7 @@ class ContactPreviewSection extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     final isDark = theme.brightness == Brightness.dark;
+    final primary = theme.colorScheme.primary;
     final accent = theme.colorScheme.secondary;
 
     return Container(
@@ -21,15 +22,18 @@ class ContactPreviewSection extends StatelessWidget {
           begin: Alignment.topLeft,
           end: Alignment.bottomRight,
           colors: [
-            accent.withValues(alpha: isDark ? 0.08 : 0.05),
+            primary.withValues(alpha: isDark ? 0.15 : 0.08),
             theme.colorScheme.surface,
-            accent.withValues(alpha: isDark ? 0.06 : 0.03),
+            accent.withValues(alpha: isDark ? 0.15 : 0.08),
           ],
         ),
+        border: Border.symmetric(
+          horizontal: BorderSide(color: primary.withValues(alpha: 0.2)),
+        )
       ),
       padding: const EdgeInsets.symmetric(
         horizontal: AppConstants.spaceLg,
-        vertical: AppConstants.space3Xl,
+        vertical: 80,
       ),
       child: Center(
         child: ConstrainedBox(
@@ -39,27 +43,33 @@ class ContactPreviewSection extends StatelessWidget {
           child: Column(
             children: [
               Container(
-                width: 48,
-                height: 48,
+                width: 64,
+                height: 64,
                 decoration: BoxDecoration(
-                  color: accent.withValues(alpha: 0.12),
+                  color: primary.withValues(alpha: 0.15),
                   shape: BoxShape.circle,
+                  border: Border.all(color: primary.withValues(alpha: 0.4), width: 2),
+                  boxShadow: [
+                    BoxShadow(color: primary.withValues(alpha: 0.2), blurRadius: 30)
+                  ]
                 ),
-                child: Icon(Icons.forum_outlined, color: accent, size: 22),
+                child: Icon(Icons.rocket_launch_rounded, color: primary, size: 30),
               ),
               const SizedBox(height: AppConstants.spaceLg),
               Text(
-                localized('Let\'s Connect', 'Bağlantı Kuralım'),
+                localized('Ready to initialize?', 'Sistemi başlatmaya hazır mıyız?'),
                 style: theme.textTheme.displayMedium,
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppConstants.spaceMd),
               Text(
                 localized(
-                  'Follow my current work through GitHub and LinkedIn.',
-                  'Güncel çalışmalarımı GitHub ve LinkedIn üzerinden takip edebilirsin.',
+                  'Looking for a developer to bring your game concept or software project to life? Let\'s talk.',
+                  'Oyun konseptini veya yazılım projeni hayata geçirecek bir geliştirici mi arıyorsun? Konuşalım.',
                 ),
-                style: theme.textTheme.bodyLarge,
+                style: theme.textTheme.bodyLarge?.copyWith(
+                  color: theme.colorScheme.onSurface.withValues(alpha: 0.8),
+                ),
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: AppConstants.spaceXl),
@@ -67,8 +77,12 @@ class ContactPreviewSection extends StatelessWidget {
                 onPressed: () {
                   context.go(AppRoutes.contact);
                 },
-                icon: const Icon(Icons.forum_outlined),
-                label: Text(localized('Contact Details', 'İletişim Bilgileri')),
+                icon: const Icon(Icons.forum_rounded),
+                label: Text(localized('Initialize Contact', 'İletişime Geç')),
+                style: ElevatedButton.styleFrom(
+                  padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 20),
+                  textStyle: theme.textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w800),
+                ),
               ),
             ],
           ),

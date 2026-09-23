@@ -1,11 +1,11 @@
 {
-    "name": "Erhan Ant Portfolio",
-    "short_name": "Erhan Ant",
+    "name": "Erhan Ant | Developer",
+    "short_name": "EA Portfolio",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#F8FAFC",
-    "theme_color": "#0F766E",
-    "description": "A bilingual portfolio for Erhan Ant — Software & IT.",
+    "background_color": "#0B0F19",
+    "theme_color": "#3B82F6",
+    "description": "Software projects, Game Development, IT support experience, and professional profiles.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
